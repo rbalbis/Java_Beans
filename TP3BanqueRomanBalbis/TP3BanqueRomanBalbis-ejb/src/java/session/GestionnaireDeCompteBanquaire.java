@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tp3;
+package session;
 
 import java.util.List;
 import javax.ejb.EJB;
@@ -21,8 +21,11 @@ import javax.persistence.Query;
 @LocalBean
 public class GestionnaireDeCompteBanquaire {
 
-    @PersistenceContext(unitName = "TP1CustomerApplication-ejbPU")
+    @PersistenceContext(unitName = "TP3BanqueRomanBalbis-ejbPU")
     private EntityManager em;
+
+    
+    
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
@@ -40,5 +43,13 @@ public class GestionnaireDeCompteBanquaire {
         creerCompte(new CompteBanquaire("Paul McCartney", 950000));
         creerCompte(new CompteBanquaire("Ringo Starr", 20000));
         creerCompte(new CompteBanquaire("Georges Harrisson", 100000));
+    }
+
+    public void persist(Object object) {
+        em.persist(object);
+    }
+
+    public void persist1(Object object) {
+        em.persist(object);
     }
 }
