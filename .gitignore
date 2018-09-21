@@ -1,0 +1,13 @@
+/RomanBalbis/nbproject/private/
+/RomanBalbis/RomanBalbis-war/nbproject/private/
+/RomanBalbis/RomanBalbis-ejb/nbproject/private/
+*/build
+*/*.war
+/TP3BanqueRomanBalbis/nbproject/private/
+/TP3BanqueRomanBalbis/TP3BanqueRomanBalbis-war/nbproject/private/
+/TP3BanqueRomanBalbis/TP3BanqueRomanBalbis-ejb/nbproject/private/
+/TP3BanqueRomanBalbis/TP3BanqueRomanBalbis-ejb/build/
+/TP3BanqueRomanBalbis/TP3BanqueRomanBalbis-war/dist/
+/TP3BanqueRomanBalbis/TP3BanqueRomanBalbis-war/build/
+/TP3BanqueRomanBalbis/TP3BanqueRomanBalbis-ejb/dist/
+/TP3BanqueRomanBalbis/dist/
