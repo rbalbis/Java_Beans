@@ -6,6 +6,7 @@
 package session;
 
 import entities.CompteBancaire;
+import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -20,37 +21,40 @@ import javax.persistence.Query;
  */
 @Stateless
 @LocalBean
-public class GestionnaireDeCompteBancaire {
+public class GestionnaireDeCompteBancaire implements Serializable{
 
     @PersistenceContext(unitName = "TP3BanqueRomanBalbis-ejbPU")
     private EntityManager em;
 
-    
-    
-
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
-    public void creerCompte(CompteBancaire c) {
+    public void createAccount(CompteBancaire c) {
         em.persist(c);
     }
 
-    List<CompteBancaire> getAllComptes() {
-        Query query = em.createNamedQuery("CompteBanquaire.findAll");
+    public List<CompteBancaire> getAllComptes() {
+        Query query = em.createNamedQuery("CompteBancaire.findAll");
         return query.getResultList();
+    }
+    
+    public CompteBancaire getComptes(Long id) {
+        Query query = em.createQuery("select c from CompteBancaire c where c.id = :id");
+        query.setParameter("id", id);
+        return (CompteBancaire)query.getSingleResult();
+    }
+    
+    public void update(CompteBancaire compte){
+        CompteBancaire compteBancaire = em.merge(compte);
+    }
+    
+    public void remove(CompteBancaire compte){
+        em.remove(compte);
     }
 
     public void creerComptesTest() {
-        creerCompte(new CompteBancaire("John Lennon", 150000));
-        creerCompte(new CompteBancaire("Paul McCartney", 950000));
-        creerCompte(new CompteBancaire("Ringo Starr", 20000));
-        creerCompte(new CompteBancaire("Georges Harrisson", 100000));
-    }
-
-    public void persist(Object object) {
-        em.persist(object);
-    }
-
-    public void persist1(Object object) {
-        em.persist(object);
+        createAccount(new CompteBancaire("John Lennon", 150000));
+        createAccount(new CompteBancaire("Paul McCartney", 950000));
+        createAccount(new CompteBancaire("Ringo Starr", 20000));
+        createAccount(new CompteBancaire("Georges Harrisson", 100000));
     }
 }

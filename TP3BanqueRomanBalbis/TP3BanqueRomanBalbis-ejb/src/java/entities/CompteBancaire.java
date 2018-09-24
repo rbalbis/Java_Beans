@@ -70,6 +70,11 @@ public class CompteBancaire implements Serializable {
             return 0;
         }
     }
+    
+    public double calculTauxInteret(int capital, int tauxAnnuel, int duree){
+        double res = (capital + tauxAnnuel * duree)/100;
+        return res;
+    }
 
     /**
      * Set the value of balance
