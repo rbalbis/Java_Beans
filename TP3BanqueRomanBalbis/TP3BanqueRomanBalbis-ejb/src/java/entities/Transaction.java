@@ -27,6 +27,14 @@ public class Transaction implements Serializable {
     private Long idReceveur;
     private int montant;
 
+    Transaction(){
+    }
+    public Transaction(Long emetteur, Long receveur, int montant) {
+            idEmetteur = emetteur;
+            idReceveur = receveur;
+            this.montant = montant;
+    }
+
     public Long getIdEmetteur() {
         return idEmetteur;
     }

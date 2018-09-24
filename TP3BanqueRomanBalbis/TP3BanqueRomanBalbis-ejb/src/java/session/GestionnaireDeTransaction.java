@@ -26,7 +26,8 @@ public class GestionnaireDeTransaction implements Serializable{
     @PersistenceContext(unitName = "TP3BanqueRomanBalbis-ejbPU")
     private EntityManager em;
 
-    public void createTransaction(Transaction t) {
+    public void createTransaction(Long emetteur, Long receveur, int montant) {
+        Transaction t = new Transaction(emetteur, receveur, montant);
         em.persist(t);
     }
 

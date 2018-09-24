@@ -38,10 +38,8 @@ public class GestionnaireDeCompteBancaire implements Serializable {
     }
 
     public CompteBancaire getComptes(Long id) {
-        Query query = em.createQuery("select c from CompteBancaire c where c.id = :id");
-        query.setParameter("id", id);
-        CompteBancaire x = (CompteBancaire) query.getSingleResult();
-        return (CompteBancaire) query.getSingleResult();
+        return em.find(CompteBancaire.class, id);
+        
     }
 
     public void update(CompteBancaire compte) {

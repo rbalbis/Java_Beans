@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <f:metadata>
+        <f:viewParam name="idCompte" value="#{accountManagedBean.idCompte}"  
+                     required="true"/> 
+    </f:metadata>
+    <h:head>
+        <title>Effectuer un virement</title>
+
+    </h:head>
+    <h:body>
+        <ui:composition template="./templates/template_default.xhtml">
+            <ui:define name="contenu">
+                <div class="card">
+                    <div class="card-body">
+                        <h:form style="margin: 30px">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <ui:param name="montantCompte" value="#{accountManagedBean.getMontantCompteBancaire()}"/>
+                                    <div>Montant actuel du compte : <h:outputText value="#{montantCompte}"/>
+                                    </div>
+                                    <h:outputLabel value="Compte débité : " for="compteDedite"/>  
+                                    <h:selectOneMenu value="#{transactionManagedBean.idCompteDonneur}">
+                                        <f:selectItems
+                                            id="compteDedite"
+                                            value="#{accountManagedBean.getcompteBancaires()}" 
+                                            var="cd"
+                                            itemLabel="#{cd.ownerName}" 
+                                            itemValue="#{cd.id}" />
+                                    </h:selectOneMenu>
+                                    <h:outputLabel value="Compte crédité : " for="compteCredit"/>  
+                                    <h:selectOneMenu value="#{transactionManagedBean.idCompteReceveur}">
+                                        <f:selectItems
+                                            id="compteCredit"
+                                            value="#{accountManagedBean.getcompteBancaires()}" 
+                                            var="cc"
+                                            itemLabel="#{cc.ownerName}" 
+                                            itemValue="#{cc.id}" />
+                                    </h:selectOneMenu>
+                                    <h:outputLabel for="montant">Montant : </h:outputLabel>
+                                    <h:inputText value="#{transactionManagedBean.montant}" class="form-control" id="montant"/>
+                                </div>
+                            </div>
+
+
+                            <h:commandButton action="#{transactionManagedBean.send()}" value="Effectuer le virement" class="btn btn-primary">
+
+                            </h:commandButton>
+
+                        </h:form>
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
