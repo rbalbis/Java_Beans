@@ -41,6 +41,7 @@ public class AccountManagedBean implements Serializable {
      * @return 
      */  
     public List<CompteBancaire> getcompteBancaires() {  
+        testUsers();
         if(compteBancaires == null){
             compteBancaires = gestionnaireDeCompteBancaire.getAllComptes();
         }
