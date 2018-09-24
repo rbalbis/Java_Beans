@@ -33,7 +33,7 @@ public class GestionnaireDeCompteBancaire implements Serializable{
     }
 
     public List<CompteBancaire> getAllComptes() {
-        Query query = em.createQuery("select c from CompteBancaire c ");
+        Query query = em.createQuery("select c from CompteBancaire c");
         return query.getResultList();
     }
     

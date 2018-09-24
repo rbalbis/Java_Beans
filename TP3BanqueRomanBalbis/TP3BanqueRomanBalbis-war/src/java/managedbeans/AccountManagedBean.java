@@ -8,9 +8,12 @@ package managedbeans;
 import entities.CompteBancaire;
 import java.io.Serializable;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.ejb.PostActivate;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import javax.persistence.PostLoad;
 import session.GestionnaireDeCompteBancaire;
 
 /**
@@ -31,21 +34,22 @@ public class AccountManagedBean implements Serializable {
      */
     public AccountManagedBean() {
     }
-    
-    public void testUsers(){
+
+    @PostConstruct
+    public void testUsers() {
         gestionnaireDeCompteBancaire.creerComptesTest();
     }
-    
-    /** 
-     * Renvoie la liste des compte pour affichage dans une DataTable 
-     * @return 
-     */  
-    public List<CompteBancaire> getcompteBancaires() {  
-        testUsers();
-        if(compteBancaires == null){
+
+    /**
+     * Renvoie la liste des compte pour affichage dans une DataTable
+     *
+     * @return
+     */
+    public List<CompteBancaire> getcompteBancaires() {
+        if (compteBancaires == null) {
             compteBancaires = gestionnaireDeCompteBancaire.getAllComptes();
         }
         return this.compteBancaires;
-    } 
+    }
 
 }
