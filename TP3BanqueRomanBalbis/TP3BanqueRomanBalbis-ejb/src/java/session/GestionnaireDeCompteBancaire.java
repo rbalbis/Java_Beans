@@ -5,6 +5,7 @@
  */
 package session;
 
+import entities.CompteBancaire;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -19,7 +20,7 @@ import javax.persistence.Query;
  */
 @Stateless
 @LocalBean
-public class GestionnaireDeCompteBanquaire {
+public class GestionnaireDeCompteBancaire {
 
     @PersistenceContext(unitName = "TP3BanqueRomanBalbis-ejbPU")
     private EntityManager em;
@@ -29,20 +30,20 @@ public class GestionnaireDeCompteBanquaire {
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
-    public void creerCompte(CompteBanquaire c) {
+    public void creerCompte(CompteBancaire c) {
         em.persist(c);
     }
 
-    List<CompteBanquaire> getAllComptes() {
+    List<CompteBancaire> getAllComptes() {
         Query query = em.createNamedQuery("CompteBanquaire.findAll");
         return query.getResultList();
     }
 
     public void creerComptesTest() {
-        creerCompte(new CompteBanquaire("John Lennon", 150000));
-        creerCompte(new CompteBanquaire("Paul McCartney", 950000));
-        creerCompte(new CompteBanquaire("Ringo Starr", 20000));
-        creerCompte(new CompteBanquaire("Georges Harrisson", 100000));
+        creerCompte(new CompteBancaire("John Lennon", 150000));
+        creerCompte(new CompteBancaire("Paul McCartney", 950000));
+        creerCompte(new CompteBancaire("Ringo Starr", 20000));
+        creerCompte(new CompteBancaire("Georges Harrisson", 100000));
     }
 
     public void persist(Object object) {
