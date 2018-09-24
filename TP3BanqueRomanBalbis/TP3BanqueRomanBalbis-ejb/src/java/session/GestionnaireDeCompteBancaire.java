@@ -21,11 +21,10 @@ import javax.persistence.Query;
  */
 @Stateless
 @LocalBean
-public class GestionnaireDeCompteBancaire implements Serializable{
+public class GestionnaireDeCompteBancaire implements Serializable {
 
     @PersistenceContext(unitName = "TP3BanqueRomanBalbis-ejbPU")
     private EntityManager em;
-    
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
@@ -37,20 +36,29 @@ public class GestionnaireDeCompteBancaire implements Serializable{
         Query query = em.createQuery("select c from CompteBancaire c");
         return query.getResultList();
     }
-    
+
     public CompteBancaire getComptes(Long id) {
         Query query = em.createQuery("select c from CompteBancaire c where c.id = :id");
         query.setParameter("id", id);
-        CompteBancaire x = (CompteBancaire)query.getSingleResult();
-        return (CompteBancaire)query.getSingleResult();
+        CompteBancaire x = (CompteBancaire) query.getSingleResult();
+        return (CompteBancaire) query.getSingleResult();
     }
-    
-    public void update(CompteBancaire compte){
+
+    public void update(CompteBancaire compte) {
         CompteBancaire compteBancaire = em.merge(compte);
     }
-    
-    public void remove(CompteBancaire compte){
+
+    public void remove(CompteBancaire compte) {
         em.remove(compte);
+    }
+
+    public void remove(Long id) {
+        String selectQuery = "SELECT c FROM CompteBancaire c WHERE c.id = " + id;
+        List<CompteBancaire> compteToRemove = em.createQuery(selectQuery).getResultList();
+        int x = 5;
+        for (CompteBancaire compte : compteToRemove) {
+            em.remove(compte);
+        }
     }
 
     public void creerComptesTest() {
@@ -64,7 +72,7 @@ public class GestionnaireDeCompteBancaire implements Serializable{
         Query query = em.createQuery("update CompteBancaire c set c.balance = c.balance +  :montant where c.id = :id");
         query.setParameter("montant", montant);
         query.setParameter("id", id);
-        query.executeUpdate();  
-        
+        query.executeUpdate();
+
     }
 }

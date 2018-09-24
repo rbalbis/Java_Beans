@@ -32,7 +32,7 @@ public class AccountManagedBean implements Serializable {
     private Long idCompte;
     private double montant;
 
-      public Long getIdCompte() {
+    public Long getIdCompte() {
         return idCompte;
     }
 
@@ -47,7 +47,6 @@ public class AccountManagedBean implements Serializable {
     public void setMontant(double montant) {
         this.montant = montant;
     }
-    
 
     /**
      * Creates a new instance of AccountManagedBean
@@ -72,21 +71,28 @@ public class AccountManagedBean implements Serializable {
         return this.compteBancaires;
     }
 
-    
-    public CompteBancaire getcompteBancaire(){
+    public CompteBancaire getcompteBancaire() {
         return gestionnaireDeCompteBancaire.getComptes(idCompte);
     }
-    
-    public double getMontantCompteBancaire(){
+
+    public double getMontantCompteBancaire() {
         return gestionnaireDeCompteBancaire.getComptes(idCompte).getBalance();
     }
-    
-    public void setSoldeCompteBancaire(){
-         gestionnaireDeCompteBancaire.setSoldeCompteBancaire(idCompte,montant);
+
+    public void setSoldeCompteBancaire() {
+        gestionnaireDeCompteBancaire.setSoldeCompteBancaire(idCompte, montant);
     }
-    
-    public void setSoldeCompteBancaireNegatif(){
-        this.montant = - this.montant;
+
+    public void setSoldeCompteBancaireNegatif() {
+        this.montant = -this.montant;
         setSoldeCompteBancaire();
+    }
+
+    public void deleteAccount(Long id) {
+        
+        gestionnaireDeCompteBancaire.remove(id);
+        
+        getcompteBancaires();
+        
     }
 }
