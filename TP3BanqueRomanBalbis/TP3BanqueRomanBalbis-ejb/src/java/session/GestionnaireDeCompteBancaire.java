@@ -21,7 +21,7 @@ import javax.persistence.Query;
  */
 @Stateless
 @LocalBean
-public class GestionnaireDeCompteBancaire implements Serializable{
+public class GestionnaireDeCompteBancaire implements Serializable {
 
     @PersistenceContext(unitName = "TP3BanqueRomanBalbis-ejbPU")
     private EntityManager em;
@@ -36,19 +36,24 @@ public class GestionnaireDeCompteBancaire implements Serializable{
         Query query = em.createQuery("select c from CompteBancaire c");
         return query.getResultList();
     }
-    
+
     public CompteBancaire getComptes(Long id) {
         Query query = em.createQuery("select c from CompteBancaire c where c.id = :id");
         query.setParameter("id", id);
-        return (CompteBancaire)query.getSingleResult();
+        return (CompteBancaire) query.getSingleResult();
     }
-    
-    public void update(CompteBancaire compte){
+
+    public void update(CompteBancaire compte) {
         CompteBancaire compteBancaire = em.merge(compte);
     }
-    
-    public void remove(CompteBancaire compte){
-        em.remove(compte);
+
+    public void remove(Long id) {
+        String selectQuery = "SELECT c FROM CompteBancaire c WHERE c.id = " + id;
+        List<CompteBancaire> compteToRemove = em.createQuery(selectQuery).getResultList();
+        int x = 5;
+        for (CompteBancaire compte : compteToRemove) {
+            em.remove(compte);
+        }
     }
 
     public void creerComptesTest() {

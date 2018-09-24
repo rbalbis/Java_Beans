@@ -26,6 +26,9 @@ public class AccountManagedBean implements Serializable {
 
     private List<CompteBancaire> compteBancaires;
 
+    private int montant;
+    private long compteId;
+
     @EJB
     private GestionnaireDeCompteBancaire gestionnaireDeCompteBancaire;
 
@@ -50,6 +53,42 @@ public class AccountManagedBean implements Serializable {
             compteBancaires = gestionnaireDeCompteBancaire.getAllComptes();
         }
         return this.compteBancaires;
+    }
+
+    public void changeAccount(Long id) {
+        Long x = id;
+        Long y = id;
+
+    }
+
+    public void deleteAccount(Long id) {
+        System.out.println(id);
+        gestionnaireDeCompteBancaire.remove(id);
+        getcompteBancaires();
+    }
+
+    public void sendForm() {
+        int x = montant;
+        int y = montant;
+        long a = compteId;
+        long b = compteId;
+
+    }
+
+    public int getMontant() {
+        return montant;
+    }
+
+    public void setMontant(int montant) {
+        this.montant = montant;
+    }
+
+    public long getCompteId() {
+        return compteId;
+    }
+
+    public void setCompteId(long compteId) {
+        this.compteId = compteId;
     }
 
 }
