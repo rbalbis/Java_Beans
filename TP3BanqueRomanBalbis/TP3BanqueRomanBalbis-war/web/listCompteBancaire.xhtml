@@ -29,7 +29,7 @@
                         <ui:repeat value="#{accountManagedBean.compteBancaires}" var="item">
                             <tr>
                                 <th scope="row">#{item.id}</th>
-                                <td>#{item.ownerName}</td>
+                                <td><h:link outcome="faces/gestionSolde.xhtml?idCompte=#{item.id}">#{item.ownerName}</h:link></td>
                                 <td>#{item.balance}</td>
                                 <h:form>
                                 <td><h:commandButton value="Supprimer" class="btn btn-danger mb-2" action="#{accountManagedBean.deleteAccount(item.id)}"/>  </td>

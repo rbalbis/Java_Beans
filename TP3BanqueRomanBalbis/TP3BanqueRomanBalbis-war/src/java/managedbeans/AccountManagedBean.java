@@ -81,6 +81,7 @@ public class AccountManagedBean implements Serializable {
 
     public void setSoldeCompteBancaire() {
         gestionnaireDeCompteBancaire.setSoldeCompteBancaire(idCompte, montant);
+        this.montant = 0.0;
     }
 
     public void setSoldeCompteBancaireNegatif() {
