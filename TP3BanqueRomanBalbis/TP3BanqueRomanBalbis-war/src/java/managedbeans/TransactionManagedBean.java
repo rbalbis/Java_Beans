@@ -39,6 +39,15 @@ public class TransactionManagedBean implements Serializable {
     
     public void send(){
         gestionnaireDeTransaction.createTransaction(idCompteDonneur, idCompteReceveur, montant);
+        gestionnaireDeCompteBancaire.addSoldeCompteBancaire(idCompteReceveur, montant);
+        gestionnaireDeCompteBancaire.removeSoldeCompteBancaire(idCompteDonneur, montant);
+    }
+    
+      public double getMontantCompteBancaire() {
+        if(idCompteDonneur == null){
+            return 0;
+        }
+        return gestionnaireDeCompteBancaire.getComptes(idCompteDonneur).getBalance();
     }
 
     public Long getIdCompteDonneur() {

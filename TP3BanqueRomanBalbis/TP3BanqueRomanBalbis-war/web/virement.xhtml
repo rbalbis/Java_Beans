@@ -4,10 +4,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <f:metadata>
-        <f:viewParam name="idCompte" value="#{accountManagedBean.idCompte}"  
-                     required="true"/> 
-    </f:metadata>
+
     <h:head>
         <title>Effectuer un virement</title>
 
@@ -20,7 +17,7 @@
                         <h:form style="margin: 30px">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <ui:param name="montantCompte" value="#{accountManagedBean.getMontantCompteBancaire()}"/>
+                                    <ui:param id="montantCompte" name="montantCompte" value="#{transactionManagedBean.getMontantCompteBancaire()}"/>
                                     <div>Montant actuel du compte : <h:outputText value="#{montantCompte}"/>
                                     </div>
                                     <h:outputLabel value="Compte débité : " for="compteDedite"/>  
@@ -31,6 +28,7 @@
                                             var="cd"
                                             itemLabel="#{cd.ownerName}" 
                                             itemValue="#{cd.id}" />
+                                         <f:ajax event="change" listener="#{transactionManagedBean.getMontantCompteBancaire()}" />
                                     </h:selectOneMenu>
                                     <h:outputLabel value="Compte crédité : " for="compteCredit"/>  
                                     <h:selectOneMenu value="#{transactionManagedBean.idCompteReceveur}">

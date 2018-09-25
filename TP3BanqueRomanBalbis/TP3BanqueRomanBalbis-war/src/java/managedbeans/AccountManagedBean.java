@@ -76,11 +76,15 @@ public class AccountManagedBean implements Serializable {
     }
 
     public double getMontantCompteBancaire() {
+        if(idCompte == null){
+            return 0;
+        }
         return gestionnaireDeCompteBancaire.getComptes(idCompte).getBalance();
     }
+    
 
     public void setSoldeCompteBancaire() {
-        gestionnaireDeCompteBancaire.setSoldeCompteBancaire(idCompte, montant);
+        gestionnaireDeCompteBancaire.addSoldeCompteBancaire(idCompte, montant);
         this.montant = 0.0;
     }
 

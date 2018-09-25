@@ -38,8 +38,7 @@ public class GestionnaireDeCompteBancaire implements Serializable {
     }
 
     public CompteBancaire getComptes(Long id) {
-        return em.find(CompteBancaire.class, id);
-        
+        return em.find(CompteBancaire.class, id);      
     }
 
     public void update(CompteBancaire compte) {
@@ -66,11 +65,17 @@ public class GestionnaireDeCompteBancaire implements Serializable {
         createAccount(new CompteBancaire("Georges Harrisson", 100000));
     }
 
-    public void setSoldeCompteBancaire(Long id, double montant) {
+    public void addSoldeCompteBancaire(Long id, double montant) {
         Query query = em.createQuery("update CompteBancaire c set c.balance = c.balance +  :montant where c.id = :id");
         query.setParameter("montant", montant);
         query.setParameter("id", id);
         query.executeUpdate();
 
     }
+
+    public void removeSoldeCompteBancaire(Long idCompteDonneur, double montant) {
+        addSoldeCompteBancaire(idCompteDonneur, -montant);
+    }
+
+
 }

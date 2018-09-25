@@ -6,7 +6,7 @@
 package session;
 
 import entities.CompteBancaire;
-import entities.Transaction;
+import entities.Operation;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -27,32 +27,33 @@ public class GestionnaireDeTransaction implements Serializable{
     private EntityManager em;
 
     public void createTransaction(Long emetteur, Long receveur, int montant) {
-        Transaction t = new Transaction(emetteur, receveur, montant);
+        
+        Operation t = new Operation(emetteur, receveur, montant);
         em.persist(t);
     }
 
-    Transaction Transaction(Long id) {
+    Operation Transaction(Long id) {
         Query query = em.createQuery("select t from Transaction t where t.id = :id");
         query.setParameter("id", id);
-        return (Transaction) query.getSingleResult();
+        return (Operation) query.getSingleResult();
     }
 
-    List<Transaction> getAllTransactionFromAccount(Long id) {
+    List<Operation> getAllTransactionFromAccount(Long id) {
         Query query = em.createQuery("select t from Transaction t where t.idEmetteur = :id or t.idReceveur = :id");
         query.setParameter("id", id);
-        return (List<Transaction>) query.getSingleResult();
+        return (List<Operation>) query.getSingleResult();
     }
     
-    List<Transaction> getReceivedTransactionFromAccount(Long id) {
+    List<Operation> getReceivedTransactionFromAccount(Long id) {
         Query query = em.createQuery("select t from Transaction t where t.idReceveur = :id");
         query.setParameter("id", id);
-        return (List<Transaction>) query.getSingleResult();
+        return (List<Operation>) query.getSingleResult();
     }
     
-    List<Transaction> getSentTransactionFromAccount(Long id) {
+    List<Operation> getSentTransactionFromAccount(Long id) {
         Query query = em.createQuery("select t from Transaction t where t.idEmetteur = :id");
         query.setParameter("id", id);
-        return (List<Transaction>) query.getSingleResult();
+        return (List<Operation>) query.getSingleResult();
     }
 
     // Add business logic below. (Right-click in editor and choose

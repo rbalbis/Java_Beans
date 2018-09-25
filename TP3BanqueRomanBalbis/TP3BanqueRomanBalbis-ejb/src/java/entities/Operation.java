@@ -7,30 +7,38 @@ package entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 /**
  *
  * @author geoffreyroman
  */
 @Entity
-public class Transaction implements Serializable {
+public class Operation implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    private Long idEmetteur;    
+    @ManyToOne(fetch=FetchType.LAZY)
+    private CompteBancaire compteBancaire;
+    private Long idEmetteur;
     private Long idReceveur;
     private int montant;
+    
 
-    Transaction(){
+    Operation(){
     }
-    public Transaction(Long emetteur, Long receveur, int montant) {
-            idEmetteur = emetteur;
+    
+    public Operation(Long emetteur, Long receveur, int montant) {
+            this.idEmetteur = emetteur;
             idReceveur = receveur;
             this.montant = montant;
     }
@@ -78,10 +86,10 @@ public class Transaction implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Transaction)) {
+        if (!(object instanceof Operation)) {
             return false;
         }
-        Transaction other = (Transaction) object;
+        Operation other = (Operation) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
