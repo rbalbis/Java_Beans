@@ -6,12 +6,14 @@
 package managedbeans;
 
 import entities.CompteBancaire;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.PostActivate;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.persistence.PostLoad;
@@ -93,11 +95,11 @@ public class AccountManagedBean implements Serializable {
         setSoldeCompteBancaire();
     }
 
-    public void deleteAccount(Long id) {
+    public void deleteAccount(Long id) throws IOException {
         
         gestionnaireDeCompteBancaire.remove(id);
-        
-        getcompteBancaires();
+        compteBancaires = gestionnaireDeCompteBancaire.getAllComptes();
+        FacesContext.getCurrentInstance().getExternalContext().redirect("listCompteBancaire.xhtml");
         
     }
 }

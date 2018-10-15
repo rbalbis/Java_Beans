@@ -6,9 +6,9 @@
 package managedbeans;
 
 import java.io.Serializable;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 import javax.enterprise.context.SessionScoped;
 import session.GestionnaireDeCompteBancaire;
 import session.GestionnaireDeTransaction;
@@ -30,11 +30,17 @@ public class TransactionManagedBean implements Serializable {
     private Long idCompteDonneur;
     private Long idCompteReceveur;
     private int montant;
+    private double solde;
 
     /**
      * Creates a new instance of TransactionManagedBean
      */
     public TransactionManagedBean() {
+    }
+    
+    public void onload() { 
+        idCompteDonneur = gestionnaireDeCompteBancaire.getAllComptes().get(0).getId();        
+        getMontantCompteBancaire();
     }
     
     public void send(){
@@ -45,11 +51,22 @@ public class TransactionManagedBean implements Serializable {
     
       public double getMontantCompteBancaire() {
         if(idCompteDonneur == null){
+            solde = 0;
             return 0;
         }
-        return gestionnaireDeCompteBancaire.getComptes(idCompteDonneur).getBalance();
+        solde = gestionnaireDeCompteBancaire.getComptes(idCompteDonneur).getBalance();
+        return solde;
     }
 
+    public double getSolde() {
+        return solde;
+    }
+
+    public void setSolde(double solde) {
+        this.solde = solde;
+    }
+
+      
     public Long getIdCompteDonneur() {
         return idCompteDonneur;
     }
