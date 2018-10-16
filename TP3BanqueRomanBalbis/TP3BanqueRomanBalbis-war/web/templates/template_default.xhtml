@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 
     <h:head>
         <title>
@@ -12,7 +13,76 @@
     </h:head>
     <body>
         <f:view>
-            <div>
+            
+            
+<div class="wrapper">
+
+    <!-- Sidebar -->
+    <nav id="sidebar">
+        <div class="sidebar-header" style="text-align: center;">
+            <a class="navbar-brand" href="../" >
+                        <img src="./images/bank2.png" width="100" height="100" alt=""/>
+            </a>
+            <c:if test="#{login.isLoged}">
+                <h3 style="text-align: left; margin-top: 10px"> Bonjour &nbsp; <b>#{login.user}</b></h3>
+            </c:if>
+             <c:if test="#{!login.isLoged}">
+                <h3 style="text-align: left; margin-top: 10px"> Bienvenue</h3>
+            </c:if>
+        </div>
+
+        <ul class="list-unstyled components">
+            <li class="nav-item active">
+                                <a class="nav-link" href="../">Accueil</a>
+                            </li>
+                            <li class="nav-item" name="listCompteBancaire">
+                                <a class="nav-link" href="/TP3BanqueRomanBalbis-war/faces/listCompteBancaire.xhtml">Liste des comptes bancaires <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item" name="gestionSolde">
+                                <a class="nav-link" href="/TP3BanqueRomanBalbis-war/faces/gestionSolde.xhtml">Ajouter ou retirer argent</a>
+                            </li>
+                            <li class="nav-item" name="virement">
+                                <a class="nav-link" href="/TP3BanqueRomanBalbis-war/faces/virement.xhtml">Effectuer un virement</a>
+                            </li>
+        </ul>
+        <c:if test="#{login.isLoged}">
+            <div style="text-align: center">
+                <h:form>
+                    <h:commandButton value="Se deconnecter" class="btn btn-danger mb-2" action="#{login.seDeconnecter()}"/>  
+                </h:form>
+            </div>
+
+        </c:if>
+    </nav>
+
+
+    <!-- Page Content -->
+    <div id="content">
+            <c:if test="#{login.isLoged}">
+                <p>
+                    <ui:insert name="contenu" />
+                </p>
+            </c:if>
+            <c:if test="#{!login.isLoged}">
+                <p>
+                    <div class="card">
+                        <div class="card-body">
+                            <h3>Vous devez être connecté !</h3>
+                            <p>
+                                <u> <a class="nav-link" href="/TP3BanqueRomanBalbis-war/faces/login.xhtml">(Se connecter)</a> </u>
+                            </p>
+                        </div>
+                    </div>
+                    <ui:insert name="login" />
+                </p>
+            </c:if>
+    </div>
+
+</div>    
+            
+            
+            
+<!--                <div>
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
                     <a class="navbar-brand" href="/TP3BanqueRomanBalbis-war/">
                         <img src="./images/mbds.jpg" width="30" height="30" alt=""/>
@@ -36,17 +106,18 @@
                                 <a class="nav-link" href="/TP3BanqueRomanBalbis-war/faces/virement.xhtml">Effectuer un virement</a>
                             </li>
                         </ul>
+                             Bonjour &nbsp; <b>#{login.user}</b>
                     </div>
                 </nav>
 
-            </div>
-            <p>
-                <ui:insert name="contenu" />
-            </p>
+            </div>-->
+                
+           
         </f:view>
     </body>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="css/style.css" />
     <script src="javascript/menu.js"></script>
 
-</html>
+   </html>
 
