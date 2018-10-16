@@ -21,8 +21,7 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">OwnerName</th>
-                            <th scope="col">Balance</th>         
-                            <th scope="col"> </th>
+                            <th scope="col">Balance</th>   
                         </tr>
                     </thead>
                     <tbody>
@@ -31,9 +30,6 @@
                                 <th scope="row">#{item.id}</th>
                                 <td><h:link outcome="faces/gestionSolde.xhtml?idCompte=#{item.id}">#{item.ownerName}</h:link></td>
                                 <td>#{item.balance}</td>
-                                <h:form>
-                                <td><h:commandButton value="Supprimer" class="btn btn-danger mb-2" action="#{accountManagedBean.deleteAccount(item.id)}"/>  </td>
-                        </h:form>
 
                             </tr>
                         </ui:repeat>
