@@ -31,7 +31,7 @@
                                 <div class="form-group col-md-6">
                                     <ui:param name="montantCompte" value="#{accountManagedBean.getMontantCompteBancaire()}"/>
                                     
-                                    <div>Montant actuel du compte : <h:outputText value="#{montantCompte}" id="montantCompte"/>
+                                    <div>Montant actuel du compte : <h:outputText value="#{accountManagedBean.solde}" id="montantCompte"/>
                                     </div>
                                     <h:outputLabel for="montant">Montant : </h:outputLabel>
                                     <h:inputText value="#{accountManagedBean.montant}" class="form-control" id="montant"/>

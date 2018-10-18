@@ -9,6 +9,7 @@
  */
 package managedbeans;
 
+import entities.typeCompteEnum;
 import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
@@ -28,6 +29,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+
 @ManagedBean
 @SessionScoped
 public class Login implements Serializable {
@@ -37,6 +39,15 @@ public class Login implements Serializable {
     private String pwd;
     private String msg;
     private String user;
+    private typeCompteEnum typeCompte;
+
+    public typeCompteEnum getTypeCompte() {
+        return typeCompte;
+    }
+
+    public void setTypeCompte(typeCompteEnum typeCompte) {
+        this.typeCompte = typeCompte;
+    }
 
     private Boolean isLoged = false;
 
