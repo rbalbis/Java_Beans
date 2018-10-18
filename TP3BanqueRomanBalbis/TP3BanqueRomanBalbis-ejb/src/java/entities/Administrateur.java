@@ -17,14 +17,6 @@ import javax.persistence.Id;
  */
 @Entity
 public class Administrateur extends Personne implements Serializable {
- public Administrateur(){
-    
-}
-   
-    
-    public Administrateur(String nom, String prenom, typeCompteEnum typeCompte, String username, String password) {
-        super(nom, prenom, typeCompte, username, password);
-    }
     
     
 
@@ -32,8 +24,25 @@ public class Administrateur extends Personne implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private typeCompteEnum typeCompte = typeCompteEnum.ADMINISTRATEUR;
 
-    typeCompteEnum typeCompte = typeCompteEnum.ADMINISTRATEUR;
+    
+ public Administrateur(){
+    
+}
+   
+    
+    public Administrateur(String nom, String prenom, String username, String password) {
+        super(nom, prenom, typeCompteEnum.ADMINISTRATEUR, username, password);
+    }
+    
+    public typeCompteEnum getTypeCompte() {
+        return typeCompte;
+    }
+
+    public void setTypeCompte(typeCompteEnum typeCompte) {
+        this.typeCompte = typeCompte;
+    }
 
     public Long getId() {
         return id;

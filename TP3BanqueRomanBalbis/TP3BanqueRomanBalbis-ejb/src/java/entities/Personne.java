@@ -18,6 +18,13 @@ import javax.persistence.Id;
 @Entity
 public class Personne implements Serializable {
     
+    private String nom;
+    private String prenom;
+    private typeCompteEnum typeCompte;
+    private String username;
+    private String password;
+
+    
     public Personne(){
         
     }
@@ -30,10 +37,6 @@ public class Personne implements Serializable {
         this.password = password;
     }
     
-    
-    
-    public String nom;
-
     public String getNom() {
         return nom;
     }
@@ -73,10 +76,6 @@ public class Personne implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-    public String prenom;
-    public typeCompteEnum typeCompte;
-    public String username;
-    public String password;
 
     private static final long serialVersionUID = 1L;
     @Id

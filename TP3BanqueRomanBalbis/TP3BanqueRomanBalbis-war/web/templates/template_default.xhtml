@@ -33,17 +33,21 @@
 
         <ul class="list-unstyled components">
             <li class="nav-item active">
-                                <a class="nav-link" href="../">Accueil</a>
-                            </li>
-                            <li class="nav-item" name="listCompteBancaire">
-                                <a class="nav-link" href="/TP3BanqueRomanBalbis-war/faces/listCompteBancaire.xhtml">Liste des comptes bancaires <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item" name="gestionSolde">
-                                <a class="nav-link" href="/TP3BanqueRomanBalbis-war/faces/gestionSolde.xhtml">Ajouter ou retirer argent</a>
-                            </li>
-                            <li class="nav-item" name="virement">
-                                <a class="nav-link" href="/TP3BanqueRomanBalbis-war/faces/virement.xhtml">Effectuer un virement</a>
-                            </li>
+                <a class="nav-link" href="../">Accueil</a>
+                </li>
+                <li class="nav-item" name="listCompteBancaire">
+                    <a class="nav-link" href="/TP3BanqueRomanBalbis-war/faces/listCompteBancaire.xhtml">Liste des comptes bancaires <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item" name="gestionSolde">
+                    <a class="nav-link" href="/TP3BanqueRomanBalbis-war/faces/gestionSolde.xhtml">Ajouter ou retirer argent</a>
+                </li>
+                <li class="nav-item" name="virement">
+                    <a class="nav-link" href="/TP3BanqueRomanBalbis-war/faces/virement.xhtml">Effectuer un virement</a>
+                </li>
+            <!-- if typeCompte==administrateur -->
+                <li class="nav-item" name="Creation Compte">
+                    <a class="nav-link" href="/TP3BanqueRomanBalbis-war/faces/creationUtilisateur.xhtml">Creation de Comptes</a>
+                </li>
         </ul>
         <c:if test="#{login.isLoged}">
             <div style="text-align: center">

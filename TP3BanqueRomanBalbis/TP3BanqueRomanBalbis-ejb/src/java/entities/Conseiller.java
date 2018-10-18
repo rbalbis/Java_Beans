@@ -23,25 +23,29 @@ import javax.persistence.OneToOne;
 @Entity
 public class Conseiller extends Personne implements Serializable {
     
-    public Conseiller(){
-        
-    }
-
-    public Conseiller(ArrayList<Client> listClients, String nom, String prenom, typeCompteEnum typeCompte, String username, String password) {
-        super(nom, prenom, typeCompte, username, password);
-        this.listClients = listClients;
-    }
-    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
     @OneToMany(cascade={CascadeType.REFRESH,CascadeType.PERSIST}, fetch=FetchType.LAZY)  
-    ArrayList<Client> listClients;
+    private ArrayList<Client> listClients;
     
-    typeCompteEnum typeCompte = typeCompteEnum.CLIENT;
+    private typeCompteEnum typeCompte = typeCompteEnum.CONSEILLER;
 
+    
+    public Conseiller(){}
+
+    public Conseiller(ArrayList<Client> listClients, String nom, String prenom, String username, String password) {
+        super(nom, prenom, typeCompteEnum.CONSEILLER, username, password);
+        this.listClients = listClients;
+    }
+    
+     public Conseiller(String nom, String prenom, String username, String password) {
+        super(nom, prenom, typeCompteEnum.CONSEILLER, username, password);
+        this.listClients = new ArrayList<Client>();
+    }
+    
     public typeCompteEnum getTypeCompte() {
         return typeCompte;
     }

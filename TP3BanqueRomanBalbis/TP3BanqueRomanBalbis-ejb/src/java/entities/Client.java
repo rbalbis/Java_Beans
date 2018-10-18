@@ -23,29 +23,33 @@ import javax.persistence.OneToOne;
 @Entity
 public class Client extends Personne implements Serializable {
     
-    public Client(){
-        
-    }
-
-    public Client(ArrayList<CompteBancaire> listComptes, Conseiller conseiller, String nom, String prenom, typeCompteEnum typeCompte, String username, String password) {
-        super(nom, prenom, typeCompte, username, password);
-        this.listComptes = listComptes;
-        this.conseiller = conseiller;
-    }
-    
-    
-
-    private static final long serialVersionUID = 1L;
+      private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
     @OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.EAGER)  
-    ArrayList<CompteBancaire> listComptes;
+    private ArrayList<CompteBancaire> listComptes;
     
-    Conseiller conseiller;
+    private Conseiller conseiller;
+    private typeCompteEnum typeCompte = typeCompteEnum.CLIENT;
+
     
-    typeCompteEnum typeCompte = typeCompteEnum.CLIENT;
+    
+    public Client(){
+    }
+
+    public Client(String nom, String prenom, String username, String password) {
+        super(nom, prenom, typeCompteEnum.CLIENT, username, password);
+        listComptes = new ArrayList<CompteBancaire>();
+        CompteBancaire cb = new CompteBancaire(nom + " "+ prenom , 0);
+        listComptes.add(cb);
+        this.conseiller = null;
+    }
+    
+    
+
+  
 
     public typeCompteEnum getTypeCompte() {
         return typeCompte;

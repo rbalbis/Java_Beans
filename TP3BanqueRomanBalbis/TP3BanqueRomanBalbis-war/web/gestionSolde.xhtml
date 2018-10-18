@@ -19,14 +19,14 @@
                     <div class="card-body">
                         <h:form style="margin: 30px">
                             <h:selectOneMenu value="#{accountManagedBean.idCompte}">
-                                        <f:selectItems
-                                            id="compteDedite"
-                                            value="#{accountManagedBean.getcompteBancaires()}" 
-                                            var="cd"
-                                            itemLabel="#{cd.ownerName}" 
-                                            itemValue="#{cd.id}" />
-                                         <f:ajax event="change" listener="#{accountManagedBean.getMontantCompteBancaire()}" render="montantCompte" />
-                                    </h:selectOneMenu>
+                                <f:selectItems
+                                    id="compteDedite"
+                                    value="#{accountManagedBean.getcompteBancaires()}" 
+                                    var="cd"
+                                    itemLabel="#{cd.ownerName}" 
+                                    itemValue="#{cd.id}" />
+                                 <f:ajax event="change" listener="#{accountManagedBean.getMontantCompteBancaire()}" render="montantCompte" />
+                           </h:selectOneMenu>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <ui:param name="montantCompte" value="#{accountManagedBean.getMontantCompteBancaire()}"/>
