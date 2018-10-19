@@ -16,6 +16,7 @@ import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import entities.Personne;
 
 /**
  *
@@ -31,51 +32,54 @@ public class GestionnaireUtilisateur {
     private typeCompteEnum typeCompte;
     private String username;
     private String password;
-    
-    public void createUtilisateur(String nom, String prenom, String username, String password, typeCompteEnum typeCompte) {
 
-        switch(typeCompte){
-            
-            case ADMINISTRATEUR: Administrateur adm = new Administrateur(nom, prenom, username, password);
-            em.persist(adm);
-                    break;
+    public boolean createUtilisateur(String nom, String prenom, String username, String password, typeCompteEnum typeCompte) {
 
-            case CONSEILLER: Conseiller csl = new Conseiller(nom, prenom, username, password);
-                             em.persist(csl);
-                             break;
-                             
-            case CLIENT : Client clt = new Client(nom, prenom, username, password);
-                          em.persist(clt);
-                          break;
-            
-            default : break;
+        switch (typeCompte) {
+
+            case ADMINISTRATEUR:
+                Administrateur adm = new Administrateur(nom, prenom, username, password);
+                try {
+                    em.persist(adm);
+                } catch (Exception e) {
+                    return false;
+                }
+                return true;
+
+            case CONSEILLER:
+                Conseiller csl = new Conseiller(nom, prenom, username, password);
+                try {
+                    em.persist(csl);
+                } catch (Exception e) {
+                    return false;
+                }
+                return true;
+
+            case CLIENT:
+                Client clt = new Client(nom, prenom, username, password);
+                try {
+                    em.persist(clt);
+                } catch (Exception e) {
+                    return false;
+                }
+                return true;
+
+            default:
+                return false;
         }
-        
+
     }
 
-    Operation Transaction(Long id) {
-        Query query = em.createQuery("select t from Transaction t where t.id = :id");
-        query.setParameter("id", id);
-        return (Operation) query.getSingleResult();
+    public Personne getUserWithID(long id) {
+        Query q = em.createQuery("select p from Personne p where p.id = :id");
+        q.setParameter("id", id);
+        return (Personne) q.getSingleResult();
     }
 
-    List<Operation> getAllTransactionFromAccount(Long id) {
-        Query query = em.createQuery("select t from Transaction t where t.idEmetteur = :id or t.idReceveur = :id");
-        query.setParameter("id", id);
-        return (List<Operation>) query.getSingleResult();
+    public Personne getUserWithUsername(String username) {
+        Query q = em.createQuery("select p from Personne p where p.username = :username");
+        q.setParameter("username", username);
+        return (Personne) q.getSingleResult();
     }
-    
-    List<Operation> getReceivedTransactionFromAccount(Long id) {
-        Query query = em.createQuery("select t from Transaction t where t.idReceveur = :id");
-        query.setParameter("id", id);
-        return (List<Operation>) query.getSingleResult();
-    }
-    
-    List<Operation> getSentTransactionFromAccount(Long id) {
-        Query query = em.createQuery("select t from Transaction t where t.idEmetteur = :id");
-        query.setParameter("id", id);
-        return (List<Operation>) query.getSingleResult();
-    }
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+
 }

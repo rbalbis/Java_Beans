@@ -5,11 +5,14 @@
  */
 package managedbeans;
 
+import entities.Personne;
 import entities.typeCompteEnum;
+import java.io.Serializable;
 import java.util.ArrayList;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
+import javax.enterprise.context.SessionScoped;
 import session.GestionnaireUtilisateur;
 
 /**
@@ -17,8 +20,8 @@ import session.GestionnaireUtilisateur;
  * @author balbis
  */
 @Named(value = "registerManagedBean")
-@Dependent
-public class RegisterManagedBean {
+@SessionScoped
+public class RegisterManagedBean implements Serializable{
     
     @EJB
     GestionnaireUtilisateur gestionnaireUtilisateur;
@@ -55,7 +58,7 @@ public class RegisterManagedBean {
     }
     
     public ArrayList<typeCompteEnum> getTypeCompteList() {
-        ArrayList<typeCompteEnum> lt = new ArrayList<typeCompteEnum>();
+        ArrayList<typeCompteEnum> lt = new ArrayList<>();
         lt.add(typeCompteEnum.ADMINISTRATEUR);
         lt.add(typeCompteEnum.CLIENT);
         lt.add(typeCompteEnum.CONSEILLER);
@@ -92,8 +95,9 @@ public class RegisterManagedBean {
     }
     
     public void createUser(){
-        System.out.println(this.nom);
-        //gestionnaireUtilisateur.createUtilisateur(nom, prenom, username, password, typeCompte);
+        gestionnaireUtilisateur.createUtilisateur(nom, prenom, username, password, typeCompte);
+        Personne mich = gestionnaireUtilisateur.getUserWithUsername("mich");
+        System.out.println(mich.getNom());
     }
     
 }

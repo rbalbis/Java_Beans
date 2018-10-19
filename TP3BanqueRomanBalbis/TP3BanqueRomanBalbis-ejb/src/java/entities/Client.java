@@ -66,6 +66,10 @@ public class Client extends Personne implements Serializable {
     public void setListComptes(ArrayList<CompteBancaire> listComptes) {
         this.listComptes = listComptes;
     }
+    
+    public void addComptes(CompteBancaire compte) {
+        this.listComptes.add(compte);
+    }
 
     public Conseiller getConseiller() {
         return conseiller;
