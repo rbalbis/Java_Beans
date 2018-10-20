@@ -8,6 +8,7 @@ package managedbeans;
 import entities.CompteBancaire;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -34,6 +35,8 @@ public class AccountManagedBean implements Serializable {
     private Long idCompte;
     private double montant;
     private double solde;
+    
+ 
 
     public Long getIdCompte() {
         return idCompte;
