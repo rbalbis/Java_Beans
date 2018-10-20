@@ -95,9 +95,7 @@ public class RegisterManagedBean implements Serializable{
     }
     
     public void createUser(){
-        gestionnaireUtilisateur.createUtilisateur(nom, prenom, username, password, typeCompte);
-        Personne mich = gestionnaireUtilisateur.getUserWithUsername("mich");
-        System.out.println(mich.getNom());
+        gestionnaireUtilisateur.createUtilisateur(nom, prenom, username, password, typeCompte);        
     }
     
 }
