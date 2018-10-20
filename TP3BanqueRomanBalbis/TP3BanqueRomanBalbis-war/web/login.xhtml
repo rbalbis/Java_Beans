@@ -22,7 +22,7 @@
                     <h:inputSecret id="password" value="#{login.pwd}"></h:inputSecret>
                     <h:message for="password"></h:message>
                     <br/><br/>
-                    <h:commandButton action="#{login.validateUsernamePassword}"
+                    <h:commandButton action="#{login.validate()}"
                                      value="Login"
                                      class="btn btn-primary"></h:commandButton>
                     

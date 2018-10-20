@@ -79,7 +79,13 @@ public class GestionnaireUtilisateur {
     public Personne getUserWithUsername(String username) {
         Query q = em.createQuery("select p from Personne p where p.username = :username");
         q.setParameter("username", username);
-        return (Personne) q.getSingleResult();
+        Personne p;
+        try {
+            p = (Personne) q.getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+        return p;
     }
 
 }
