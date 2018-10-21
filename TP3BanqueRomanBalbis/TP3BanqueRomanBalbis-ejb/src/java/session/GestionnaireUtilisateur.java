@@ -15,6 +15,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import entities.Personne;
+import java.util.ArrayList;
 
 /**
  *
@@ -89,6 +90,14 @@ public class GestionnaireUtilisateur {
             return null;
         }
         return p;
+    }
+    
+    public Conseiller getConseillerWithUsername(String username){
+        return (Conseiller) getUserWithUsername(username);
+    }
+    
+    public Client getClientWithUsername(String username){
+        return (Client) getUserWithUsername(username);
     }
 
 }

@@ -5,6 +5,8 @@
  */
 package managedbeans;
 
+import entities.Client;
+import entities.Conseiller;
 import entities.Personne;
 import entities.typeCompteEnum;
 import java.io.Serializable;
@@ -86,7 +88,6 @@ public class RegisterManagedBean implements Serializable{
         this.password = password;
     }
     
-    
 
     /**
      * Creates a new instance of RegisterManagedBean
@@ -96,6 +97,14 @@ public class RegisterManagedBean implements Serializable{
     
     public void createUser(){
         gestionnaireUtilisateur.createUtilisateur(nom, prenom, username, password, typeCompte);        
+    }
+    
+    public Conseiller getConseillerWithUsername(String username){
+        return gestionnaireUtilisateur.getConseillerWithUsername(username);
+    }
+    
+    public Client getClientWithUsername(String username){
+        return gestionnaireUtilisateur.getClientWithUsername(username);
     }
     
 }

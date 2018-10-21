@@ -54,8 +54,8 @@ public class Conseiller extends Personne implements Serializable {
     public void setTypeCompte(typeCompteEnum typeCompte) {
         this.typeCompte = typeCompte;
     }
-    public ArrayList<Client> getListClients() {
-        return (ArrayList<Client>)listClients;
+    public Collection<Client> getListClients() {
+        return listClients;
     }
 
     public void setListClients(ArrayList<Client> listClients) {
