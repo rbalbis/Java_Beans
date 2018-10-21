@@ -20,7 +20,7 @@
     <!-- Sidebar -->
     <nav id="sidebar">
         <div class="sidebar-header" style="text-align: center;">
-            <a class="navbar-brand" href="../" >
+            <a class="navbar-brand" href="/TP3BanqueRomanBalbis-war/" >
                         <img src="./images/bank2.png" width="100" height="100" alt=""/>
             </a>
             <c:if test="#{login.isLoged}">
@@ -33,7 +33,7 @@
 
         <ul class="list-unstyled components">
             <li class="nav-item active">
-                <a class="nav-link" href="../">Accueil</a>
+                <a class="nav-link" href="/TP3BanqueRomanBalbis-war/">Accueil</a>
                 </li>
                 <li class="nav-item" name="listCompteBancaire">
                     <a class="nav-link" href="/TP3BanqueRomanBalbis-war/faces/listCompteBancaire.xhtml">Liste des comptes bancaires <span class="sr-only">(current)</span></a>
@@ -44,10 +44,12 @@
                 <li class="nav-item" name="virement">
                     <a class="nav-link" href="/TP3BanqueRomanBalbis-war/faces/virement.xhtml">Effectuer un virement</a>
                 </li>
-            <!-- if typeCompte==administrateur -->
+            <c:if test="#{login.typeCompte == 'ADMINISTRATEUR'}">
                 <li class="nav-item" name="Creation Compte">
                     <a class="nav-link" href="/TP3BanqueRomanBalbis-war/faces/creationUtilisateur.xhtml">Creation de Comptes</a>
                 </li>
+            </c:if>
+                
         </ul>
         <c:if test="#{login.isLoged}">
             <div style="text-align: center">
