@@ -18,20 +18,20 @@ password : client
 
 Action possible pour les differents profils : 
 
-###Admin : 
+### Admin : 
 - Creer utilisateur (admin, conseillers, client)
 - Gerer les comptes (Ajout d'argent, retrait d'argent, suppression du compte), pour tous les utilisateurs
 - Virements vers tous les clients depuis tous les comptes clients
 - Affecter client a un conseiller
 - Ajouter client a un compte bancaire deja existant
 
-###Conseiller : 
+### Conseiller : 
 - Gerer les comptes (Ajout d'argent, retrait d'argent, suppression du compte),de ses clients
 - Virements vers tous les clients depuis tous les clients du conseiller
 - Affecter client a un conseiller
 - Ajouter client a un compte bancaire deja existant
 
-###Client : 
+### Client : 
 - Gerer ses comptes (Ajout d'argent, retrait d'argent, suppression du compte)
 - Faire virements de ses comptes vers tous les comptes de la banque
 
