@@ -31,8 +31,9 @@ public class Client extends Personne implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @ManyToMany(cascade=CascadeType.ALL)
+    @ManyToMany
     private Collection<CompteBancaire> listComptes = new ArrayList<CompteBancaire>();
+    
     
     @ManyToOne
     private Conseiller conseiller;
@@ -67,7 +68,7 @@ public class Client extends Personne implements Serializable {
     }
     
     public void addComptes(CompteBancaire compte) {
-        this.listComptes.add(compte);
+        listComptes.add(compte);
     }
 
     public Conseiller getConseiller() {

@@ -18,23 +18,30 @@
                         <h:form style="margin: 30px">
                             <c:if test="#{login.typeCompte != 'CLIENT'}">
                                 
-                                
+                                <p>Affecter un Conseiller à un client</p>
+                                                                <h:outputText value="Conseiller : "/>
+
                                 <h:selectOneMenu value="#{registerManagedBean.conseiller}">
                                     <f:selectItems
                                         id="conseil"
                                         value="#{registerManagedBean.allConseiller}" 
                                         var="conseil"
                                         itemLabel="#{conseil.nom}"
-                                        itemValue="#{conseil}"/>
+                                        itemValue="#{conseil.id}"/>
                                 </h:selectOneMenu> 
+                                                                <br></br>                                                                <br></br>
+
+                                                                                                <h:outputText value="Client : "/>
+
                                 <h:selectOneMenu value="#{registerManagedBean.client}">
                                     <f:selectItems
                                         id="client"
                                         value="#{registerManagedBean.allClient}" 
                                         var="personne"
                                         itemLabel="#{personne.nom} #{personne.prenom}"
-                                        itemValue="#{personne}"/>
+                                        itemValue="#{personne.id}"/>
                                 </h:selectOneMenu>
+                                <br></br>                                                                <br></br>
 
                                 <h:commandButton action="#{registerManagedBean.affecterClientEtConseiller()}" value="Affecter conseiller"/>
                             </c:if>
@@ -45,4 +52,3 @@
         </ui:composition>
     </h:body>
 </html>
-

@@ -44,7 +44,7 @@ public class GestionnaireDeCompteBancaire implements Serializable {
         return query.getResultList();
     }
 
-    public CompteBancaire getComptes(Long id) {
+    public CompteBancaire getComptes(long id) {
         return em.find(CompteBancaire.class, id);      
     }
 

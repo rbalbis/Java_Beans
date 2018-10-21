@@ -36,23 +36,30 @@ public class AccountManagedBean implements Serializable {
 
     @EJB
     private GestionnaireDeCompteBancaire gestionnaireDeCompteBancaire;
-    
+    @EJB
     GestionnaireUtilisateur gestionnaireUtilisateur;
     
-    private Long idCompte;
+    private long idCompte;
     private double montant;
     private double solde;
-    
-    private Client coProprietaire;
+    private long coProprietaire;
     
  
 
-    public Long getIdCompte() {
+    public long getIdCompte() {
         return idCompte;
     }
 
-    public void setIdCompte(Long idCompte) {
+    public void setIdCompte(long idCompte) {
         this.idCompte = idCompte;
+    }
+
+    public long getCoProprietaire() {
+        return coProprietaire;
+    }
+
+    public void setCoProprietaire(long coProprietaire) {
+        this.coProprietaire = coProprietaire;
     }
 
     
@@ -95,7 +102,8 @@ public class AccountManagedBean implements Serializable {
     }
 
     public double getMontantCompteBancaire() {
-        if(idCompte == null){
+        Long idCompte2 = idCompte;
+        if(idCompte2 == null){
             solde = 0;
             return 0;
         }

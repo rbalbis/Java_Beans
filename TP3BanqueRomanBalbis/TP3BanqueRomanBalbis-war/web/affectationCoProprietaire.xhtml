@@ -21,7 +21,7 @@
                                 <c:set var="allCl" value="${registerManagedBean.allClient}"/>                                
                                 <p>Affecter un coproprietaire à un compte</p>
                                 <h:outputText value="Comptes : "/>
-                                <h:selectOneMenu value="#{allCpt}">
+                                <h:selectOneMenu value="#{accountManagedBean.idCompte}">
                                     <f:selectItems
                                         id="idCompte"
                                         value="#{accountManagedBean.compteBancaires}" 
@@ -30,17 +30,15 @@
                                         itemValue="#{compte.id}"/>
                                 </h:selectOneMenu> 
                                 <br></br>                                                                <br></br>
-
-
                                 <h:outputText value="Client : "/>
 
-                                <h:selectOneMenu value="#{allC}">
+                                <h:selectOneMenu value="#{accountManagedBean.coProprietaire}">
                                     <f:selectItems
                                         id="coProprietaire"
                                         value="#{registerManagedBean.allClient}" 
                                         var="personne"
                                         itemLabel="#{personne.nom} #{personne.prenom}"
-                                        itemValue="#{personne}"/>
+                                        itemValue="#{personne.id}"/>
                                 </h:selectOneMenu>
                                 <br></br>                                                                <br></br>
 

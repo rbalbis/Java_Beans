@@ -43,7 +43,7 @@ public class CompteBancaire implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @ManyToMany(mappedBy = "listComptes")
+    @ManyToMany(mappedBy="listComptes")
     private Collection<Client> listProprietaires = new ArrayList<Client>();
     
     
@@ -66,6 +66,10 @@ public class CompteBancaire implements Serializable {
 
     public void setListProprietaires(Collection<Client> listProprietaires) {
         this.listProprietaires = listProprietaires;
+    }
+    
+    public void addListProprietaire(Client clt){
+        this.listProprietaires.add(clt);
     }
 
 

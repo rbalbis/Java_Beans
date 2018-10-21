@@ -19,6 +19,7 @@ import entities.Personne;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import javax.ejb.EJB;
 
 /**
  *
@@ -35,6 +36,7 @@ public class GestionnaireUtilisateur {
     private String username;
     private String password;
     
+    @EJB
     GestionnaireDeCompteBancaire gestionnaireDeCompteBancaire;
 
     public Personne createUtilisateur(String nom, String prenom, String username, String password, typeCompteEnum typeCompte) {
@@ -97,19 +99,25 @@ public class GestionnaireUtilisateur {
         return p;
     }
     
-    public void affecterClientaConseiller(Client clt, Conseiller csl){
+    public void affecterClientaConseiller(long idClient, long idCons){
+        Client clt = (Client) getUserWithID(idClient);
+        Conseiller csl = (Conseiller) getUserWithID(idCons);
+        
         clt.setConseiller(csl);
         csl.addClientConseiller(clt);
         em.merge(clt);
         em.merge(csl);
     }
     
-     public void affecterCoProprietaire(Long idCompte, Client coProprietaire){
-        CompteBancaire c = gestionnaireDeCompteBancaire.getComptes(idCompte);
-        Collection<Client> clients = c.getListProprietaires();
-        clients.add(coProprietaire);
-        c.setListProprietaires(clients);
-        em.merge(c);
+     public void affecterCoProprietaire(long idCompte, long coProprietaire){
+        CompteBancaire cb = gestionnaireDeCompteBancaire.getComptes(idCompte);
+        
+        Client clt = (Client) getUserWithID(coProprietaire);
+       
+        cb.addListProprietaire(clt);
+        clt.addComptes(cb);
+        em.merge(cb);
+        em.merge(clt);
     }
     
     

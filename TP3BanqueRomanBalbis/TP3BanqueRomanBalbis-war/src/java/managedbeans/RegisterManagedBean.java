@@ -39,26 +39,26 @@ public class RegisterManagedBean implements Serializable{
     private String username;
     private String password;
     
-    private Client client;
-    private Conseiller conseiller;
+    private long client;
 
-    public Client getClient() {
+    private long conseiller;
+
+    
+    public long getClient() {
         return client;
     }
 
-    public void setClient(Client client) {
+    public void setClient(long client) {
         this.client = client;
     }
 
-    public Conseiller getConseiller() {
+    public long getConseiller() {
         return conseiller;
     }
 
-    public void setConseiller(Conseiller conseiller) {
+    public void setConseiller(long conseiller) {
         this.conseiller = conseiller;
     }
-    
-    
 
     public String getNom() {
         return nom;
@@ -111,9 +111,7 @@ public class RegisterManagedBean implements Serializable{
     }
     
 
-    public void affecterClientaConseiller(Client clt, Conseiller csl){
-        gestionnaireUtilisateur.affecterClientaConseiller(clt, csl);
-    }
+   
     
     public void affecterClientEtConseiller(){
         gestionnaireUtilisateur.affecterClientaConseiller(client, conseiller);
