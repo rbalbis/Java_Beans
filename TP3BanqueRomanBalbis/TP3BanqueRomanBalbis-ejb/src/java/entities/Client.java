@@ -7,14 +7,16 @@ package entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 /**
  *
@@ -28,9 +30,10 @@ public class Client extends Personne implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.EAGER)  
-    private ArrayList<CompteBancaire> listComptes;
+    @ManyToMany()
+    private Collection<CompteBancaire> listComptes = new ArrayList<CompteBancaire>();
     
+    @ManyToOne
     private Conseiller conseiller;
     private typeCompteEnum typeCompte = typeCompteEnum.CLIENT;
 
@@ -41,26 +44,21 @@ public class Client extends Personne implements Serializable {
 
     public Client(String nom, String prenom, String username, String password) {
         super(nom, prenom, typeCompteEnum.CLIENT, username, password);
+        
         listComptes = new ArrayList<CompteBancaire>();
-        CompteBancaire cb = new CompteBancaire(nom + " "+ prenom , 0);
+        CompteBancaire cb = new CompteBancaire(this , 0);
         listComptes.add(cb);
         this.conseiller = null;
-    }
-    
-    
-
-  
+    } 
 
     public typeCompteEnum getTypeCompte() {
         return typeCompte;
     }
 
-    public void setTypeCompte(typeCompteEnum typeCompte) {
-        this.typeCompte = typeCompte;
-    }
+   
 
     public ArrayList<CompteBancaire> getListComptes() {
-        return listComptes;
+        return (ArrayList<CompteBancaire>) listComptes;
     }
 
     public void setListComptes(ArrayList<CompteBancaire> listComptes) {

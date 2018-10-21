@@ -5,9 +5,14 @@
  */
 package session;
 
+import entities.Administrateur;
+import entities.Client;
 import entities.CompteBancaire;
+import entities.typeCompteEnum;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
@@ -25,6 +30,8 @@ public class GestionnaireDeCompteBancaire implements Serializable {
 
     @PersistenceContext(unitName = "TP3BanqueRomanBalbis-ejbPU")
     private EntityManager em;
+    
+    GestionnaireUtilisateur gestionnaireUtilisateur;
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
@@ -58,11 +65,24 @@ public class GestionnaireDeCompteBancaire implements Serializable {
         }
     }
 
+    
     public void creerComptesTest() {
-        createAccount(new CompteBancaire("John Lennon", 150000));
+        if(gestionnaireUtilisateur.getUserWithUsername("admin") == null){
+        
+        gestionnaireUtilisateur.createUtilisateur("admin", "admin", "admin1", "root", typeCompteEnum.ADMINISTRATEUR);
+       
+        gestionnaireUtilisateur.createUtilisateur("Lennon", "John", "John1", "pass", typeCompteEnum.CLIENT);
+        Client john1 = (Client) gestionnaireUtilisateur.getUserWithUsername("John1");
+        CompteBancaire compteJohn = john1.getListComptes().get(0);
+        compteJohn.deposer(1589);
+        em.persist(compteJohn);
+        }
+       /* createAccount(new CompteBancaire("John Lennon", 150000));
         createAccount(new CompteBancaire("Paul McCartney", 950000));
         createAccount(new CompteBancaire("Ringo Starr", 20000));
-        createAccount(new CompteBancaire("Georges Harrisson", 100000));
+        createAccount(new CompteBancaire("Georges Harrisson", 100000));*/
+       
+       System.out.println("Creation des comptes test ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
     }
 
     public void addSoldeCompteBancaire(Long id, double montant) {

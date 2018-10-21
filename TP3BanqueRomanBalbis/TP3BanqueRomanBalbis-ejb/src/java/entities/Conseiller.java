@@ -7,6 +7,7 @@ package entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -28,8 +29,8 @@ public class Conseiller extends Personne implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @OneToMany(cascade={CascadeType.REFRESH,CascadeType.PERSIST}, fetch=FetchType.LAZY)  
-    private ArrayList<Client> listClients;
+    @OneToMany(cascade={CascadeType.REFRESH,CascadeType.PERSIST}, fetch=FetchType.LAZY, mappedBy ="conseiller")  
+    private Collection<Client> listClients = new ArrayList<Client>();
     
     private typeCompteEnum typeCompte = typeCompteEnum.CONSEILLER;
 
@@ -54,7 +55,7 @@ public class Conseiller extends Personne implements Serializable {
         this.typeCompte = typeCompte;
     }
     public ArrayList<Client> getListClients() {
-        return listClients;
+        return (ArrayList<Client>)listClients;
     }
 
     public void setListClients(ArrayList<Client> listClients) {

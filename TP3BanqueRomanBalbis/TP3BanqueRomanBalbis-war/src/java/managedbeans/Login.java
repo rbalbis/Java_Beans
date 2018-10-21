@@ -22,6 +22,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 
 import javax.faces.application.FacesMessage;
@@ -30,6 +31,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import session.GestionnaireDeCompteBancaire;
 import session.GestionnaireUtilisateur;
 
 @ManagedBean
@@ -38,6 +40,9 @@ public class Login implements Serializable {
 
     @EJB
     GestionnaireUtilisateur gestionnaireUtilisateur;
+    
+    GestionnaireDeCompteBancaire gestionnaireDeCompteBancaire;
+
 
     private static final long serialVersionUID = 1094801825228386363L;
 
@@ -59,6 +64,12 @@ public class Login implements Serializable {
     public Boolean getIsLoged() {
         return isLoged;
     }
+
+    public void testUsersStratup() {
+        System.out.println("initialisation des comptes de tests ------------------------------------------------------------------");
+        gestionnaireDeCompteBancaire.creerComptesTest();
+    }
+
 
     public void setIsLoged(Boolean isLoged) {
         this.isLoged = isLoged;

@@ -6,11 +6,14 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 /**
@@ -21,38 +24,51 @@ import javax.persistence.OneToMany;
 public class CompteBancaire implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    public CompteBancaire(ArrayList<Client> listProprietaires, double balance) {
+        this.listProprietaires = listProprietaires;
+        this.balance = balance;
+    }
     
+     public CompteBancaire(Client client, double balance) {
+        ArrayList<Client> listCli =  new ArrayList<Client>();
+        listCli.add(client);
+        this.listProprietaires = listCli;
+
+        this.balance = balance;
+    }
     
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String ownerName;
+    @ManyToMany(mappedBy = "listComptes")
+    private Collection<Client> listProprietaires = new ArrayList<Client>();
+    
+    
     private double balance;
     
     @OneToMany(mappedBy = "compteBancaire")
     private List<Operation> transaction;
+
     
-    
-    public CompteBancaire(String ownerName, double balance){
-        this.ownerName = ownerName;
-        this.balance = balance;
-    }
     
     CompteBancaire(){
     }
 
-    /**
-     * Get the value of ownerName
-     *
-     * @return the value of ownerName
-     */
-    public String getOwnerName() {
-        return ownerName;
+    public Collection<Client> getListProprietaires() {
+        return listProprietaires;
+    }
+    
+    public ArrayList<Client> getArrayProprietaires() {
+        return (ArrayList<Client>) listProprietaires;
     }
 
-    
+    public void setListProprietaires(Collection<Client> listProprietaires) {
+        this.listProprietaires = listProprietaires;
+    }
+
 
     /**
      * Get the value of balance
@@ -88,15 +104,6 @@ public class CompteBancaire implements Serializable {
      */
     public void setBalance(double balance) {
         this.balance = balance;
-    }
-
-    /**
-     * Set the value of ownerName
-     *
-     * @param ownerName new value of ownerName
-     */
-    public void setOwnerName(String ownerName) {
-        this.ownerName = ownerName;
     }
 
     public Long getId() {

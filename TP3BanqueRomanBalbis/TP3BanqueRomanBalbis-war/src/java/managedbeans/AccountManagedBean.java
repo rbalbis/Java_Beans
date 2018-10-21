@@ -13,6 +13,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.PostActivate;
+import javax.ejb.Startup;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
@@ -69,7 +70,8 @@ public class AccountManagedBean implements Serializable {
     public void testUsers() {
         gestionnaireDeCompteBancaire.creerComptesTest();
     }
-
+    
+ 
     /**
      * Renvoie la liste des compte pour affichage dans une DataTable
      *

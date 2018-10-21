@@ -83,6 +83,7 @@ public class GestionnaireUtilisateur {
         try {
             p = (Personne) q.getSingleResult();
         } catch (Exception e) {
+            System.out.println("impossible de trouver l'utilisateur ------------------------------------------------------------------------------------------");
             return null;
         }
         return p;
