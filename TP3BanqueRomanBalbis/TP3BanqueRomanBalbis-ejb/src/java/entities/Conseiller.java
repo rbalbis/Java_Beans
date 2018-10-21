@@ -70,6 +70,19 @@ public class Conseiller extends Personne implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+    
+    public ArrayList<CompteBancaire> getCompteClientConseiller(){
+        ArrayList<CompteBancaire> listCompte = new ArrayList();
+        for(Client clt : listClients) {
+            listCompte.addAll(clt.getListComptes());
+            
+        }
+        return listCompte;
+    }
+    
+    public void addClientConseiller(Client clt){
+        listClients.add(clt);
+    }
 
     @Override
     public int hashCode() {

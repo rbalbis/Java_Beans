@@ -89,6 +89,9 @@ public class RegisterManagedBean implements Serializable{
     }
     
 
+    public void affecterClientaConseiller(Client clt, Conseiller csl){
+        gestionnaireUtilisateur.affecterClientaConseiller(clt, csl);
+    }
     /**
      * Creates a new instance of RegisterManagedBean
      */
@@ -106,5 +109,10 @@ public class RegisterManagedBean implements Serializable{
     public Client getClientWithUsername(String username){
         return gestionnaireUtilisateur.getClientWithUsername(username);
     }
+    
+    public ArrayList<Personne> getAllPersonne(){
+        return gestionnaireUtilisateur.getAllPersonne();
+    }
+
     
 }

@@ -58,8 +58,8 @@ public class Client extends Personne implements Serializable {
 
    
 
-    public ArrayList<CompteBancaire> getListComptes() {
-        return (ArrayList<CompteBancaire>) listComptes;
+    public Collection<CompteBancaire> getListComptes() {
+        return listComptes;
     }
 
     public void setListComptes(ArrayList<CompteBancaire> listComptes) {

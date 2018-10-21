@@ -92,12 +92,26 @@ public class GestionnaireUtilisateur {
         return p;
     }
     
+    public void affecterClientaConseiller(Client clt, Conseiller csl){
+        clt.setConseiller(csl);
+        csl.addClientConseiller(clt);
+        em.merge(clt);
+        em.merge(csl);
+    }
+    
     public Conseiller getConseillerWithUsername(String username){
         return (Conseiller) getUserWithUsername(username);
     }
     
     public Client getClientWithUsername(String username){
         return (Client) getUserWithUsername(username);
+    }
+    
+    public ArrayList<Personne> getAllPersonne(){
+        Query q = em.createQuery("select p from Personne p");
+        
+        return (ArrayList<Personne>) q.getSingleResult();
+        
     }
 
 }

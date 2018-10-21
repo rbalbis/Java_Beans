@@ -49,6 +49,11 @@
                     <a class="nav-link" href="/TP3BanqueRomanBalbis-war/faces/creationUtilisateur.xhtml">Creation de Comptes</a>
                 </li>
             </c:if>
+            <c:if test="#{login.typeCompte == 'CONSEILLER'}">
+                <li class="nav-item" name="Creation Compte">
+                    <a class="nav-link" href="/TP3BanqueRomanBalbis-war/faces/affectationConseillers.xhtml">Affectation Conseillers</a>
+                </li>
+            </c:if>
                 
         </ul>
         <c:if test="#{login.isLoged}">

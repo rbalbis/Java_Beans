@@ -3,14 +3,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
     <f:metadata>
         <f:viewParam name="idCompte" value="#{accountManagedBean.idCompte}"  
-               required="false"/> 
+                     required="false"/> 
     </f:metadata>
     <h:head>
         <title>Gestion du solde</title>
-        
+
     </h:head>
     <h:body>
         <ui:composition template="./templates/template_default.xhtml">
@@ -18,31 +20,63 @@
                 <div class="card">
                     <div class="card-body">
                         <h:form style="margin: 30px">
-                            <h:selectOneMenu value="#{accountManagedBean.idCompte}">
-                                <f:selectItems
-                                    id="compteDedite"
-                                    value="#{accountManagedBean.getcompteBancaires()}" 
-                                    var="cd"
-                                    itemLabel="Compte n° #{cd.id} - M. ou Mme. #{cd.listProprietaires[0].nom} #{cd.listProprietaires[0].prenom}" 
-                                    itemValue="#{cd.id}" />
-                                 <f:ajax event="change" listener="#{accountManagedBean.getMontantCompteBancaire()}" render="montantCompte" />
-                           </h:selectOneMenu>
+
+                            <c:if test="#{login.typeCompte == 'CONSEILLER'}">
+                                <c:set var = "conseiller" scope = "session" value = "#{registerManagedBean.getConseillerWithUsername(login.user)}"/>
+                                <h:selectOneMenu value="#{accountManagedBean.idCompte}">
+                                    <f:selectItems
+                                        id="compteDedite"
+                                        value="#{conseiller.getCompteClientConseiller()}" 
+                                        var="cd"
+                                        itemLabel="Compte n° #{cd.id} - M. ou Mme. #{cd.listProprietaires[0].nom} #{cd.listProprietaires[0].prenom}"
+                                        itemValue="#{cd.id}"/>
+                                <f:ajax event="change" listener="#{accountManagedBean.getMontantCompteBancaire()}" render="montantCompte" />
+
+                                </h:selectOneMenu>
+
+                            </c:if>
+                            
+                            <c:if test="#{login.typeCompte == 'CLIENT'}">
+                                <h:selectOneMenu value="#{accountManagedBean.idCompte}">
+                                    <f:selectItems
+                                        id="compteDedite"
+                                        value="#{registerManagedBean.getClientWithUsername(login.user).listComptes}" 
+                                        var="cd"
+                                        itemLabel="Compte n° #{cd.id} - M. ou Mme. #{cd.listProprietaires[0].nom} #{cd.listProprietaires[0].prenom}"
+                                        itemValue="#{cd.id}"/>
+                                <f:ajax event="change" listener="#{accountManagedBean.getMontantCompteBancaire()}" render="montantCompte" />
+
+                                </h:selectOneMenu>
+                            </c:if>
+                            
+                             <c:if test="${login.typeCompte =='ADMINISTRATEUR'}">
+                                <h:selectOneMenu value="#{accountManagedBean.idCompte}">
+                                    <f:selectItems
+                                        id="compteDedite"
+                                        value="#{accountManagedBean.getcompteBancaires()}" 
+                                        var="cd"
+                                        itemLabel="Compte n° #{cd.id} - M. ou Mme. #{cd.listProprietaires[0].nom} #{cd.listProprietaires[0].prenom}" 
+                                        itemValue="#{cd.id}" />
+                                    <f:ajax event="change" listener="#{accountManagedBean.getMontantCompteBancaire()}" render="montantCompte" />
+                                </h:selectOneMenu>
+
+                            </c:if>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <ui:param name="montantCompte" value="#{accountManagedBean.getMontantCompteBancaire()}"/>
-                                    
+
                                     <div>Montant actuel du compte : <h:outputText value="#{accountManagedBean.solde}" id="montantCompte"/>
                                     </div>
                                     <h:outputLabel for="montant">Montant : </h:outputLabel>
                                     <h:inputText value="#{accountManagedBean.montant}" class="form-control" id="montant"/>
                                 </div>
                             </div>
-                           
-                            
+
+
                             <h:commandButton action="#{accountManagedBean.setSoldeCompteBancaireNegatif()}" value="Retirer" class="btn btn-danger"/>
-                            
+
                             <h:commandButton action="#{accountManagedBean.setSoldeCompteBancaire()}" value="Ajouter" class="btn btn-primary"/>
-                            
+
                             <h:commandButton style='float:right' value="Cloturer le compte" class="btn btn-danger mb-2" action="#{accountManagedBean.deleteAccount(accountManagedBean.idCompte)}"/>  
                         </h:form>
                     </div>
