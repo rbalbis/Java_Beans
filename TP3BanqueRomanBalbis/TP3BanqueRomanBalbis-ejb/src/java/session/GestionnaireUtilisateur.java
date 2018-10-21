@@ -7,6 +7,7 @@ package session;
 
 import entities.Administrateur;
 import entities.Client;
+import entities.CompteBancaire;
 import entities.Conseiller;
 import entities.Operation;
 import entities.typeCompteEnum;
@@ -33,7 +34,7 @@ public class GestionnaireUtilisateur {
     private String username;
     private String password;
 
-    public boolean createUtilisateur(String nom, String prenom, String username, String password, typeCompteEnum typeCompte) {
+    public Personne createUtilisateur(String nom, String prenom, String username, String password, typeCompteEnum typeCompte) {
 
         switch (typeCompte) {
 
@@ -42,30 +43,30 @@ public class GestionnaireUtilisateur {
                 try {
                     em.persist(adm);
                 } catch (Exception e) {
-                    return false;
+                    return null;
                 }
-                return true;
+                return adm;
 
             case CONSEILLER:
                 Conseiller csl = new Conseiller(nom, prenom, username, password);
                 try {
                     em.persist(csl);
                 } catch (Exception e) {
-                    return false;
+                    return null;
                 }
-                return true;
+                return csl;
 
             case CLIENT:
                 Client clt = new Client(nom, prenom, username, password);
                 try {
                     em.persist(clt);
                 } catch (Exception e) {
-                    return false;
+                    return null;
                 }
-                return true;
+                return clt;
 
             default:
-                return false;
+                return null;
         }
 
     }
@@ -77,6 +78,7 @@ public class GestionnaireUtilisateur {
     }
 
     public Personne getUserWithUsername(String username) {
+
         Query q = em.createQuery("select p from Personne p where p.username = :username");
         q.setParameter("username", username);
         Personne p;
@@ -84,6 +86,9 @@ public class GestionnaireUtilisateur {
             p = (Personne) q.getSingleResult();
         } catch (Exception e) {
             System.out.println("impossible de trouver l'utilisateur ------------------------------------------------------------------------------------------");
+            if (username.equals("admin")) {
+                return createUtilisateur("admin", "admin", "admin1", "root", typeCompteEnum.ADMINISTRATEUR);
+            }
             return null;
         }
         return p;
