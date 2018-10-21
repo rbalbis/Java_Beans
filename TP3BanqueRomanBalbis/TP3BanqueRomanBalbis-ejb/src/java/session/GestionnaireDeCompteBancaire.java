@@ -67,16 +67,14 @@ public class GestionnaireDeCompteBancaire implements Serializable {
 
     
     public void creerComptesTest() {
-        if(gestionnaireUtilisateur.getUserWithUsername("admin") == null){
         
-        gestionnaireUtilisateur.createUtilisateur("admin", "admin", "admin1", "root", typeCompteEnum.ADMINISTRATEUR);
+//        gestionnaireUtilisateur.createUtilisateur("admin", "admin", "admin1", "root", typeCompteEnum.ADMINISTRATEUR);
        
-        gestionnaireUtilisateur.createUtilisateur("Lennon", "John", "John1", "pass", typeCompteEnum.CLIENT);
-        Client john1 = (Client) gestionnaireUtilisateur.getUserWithUsername("John1");
-        CompteBancaire compteJohn = john1.getListComptes().get(0);
-        compteJohn.deposer(1589);
-        em.persist(compteJohn);
-        }
+      //  Client john1 = (Client) gestionnaireUtilisateur.createUtilisateur("Lennon", "John", "John1", "pass", typeCompteEnum.CLIENT);
+        //Client john1 = (Client) gestionnaireUtilisateur.getUserWithUsername("John1");
+     //   CompteBancaire compteJohn = john1.getListComptes().get(0);
+      //  compteJohn.deposer(1589);
+      //  em.persist(compteJohn);
        /* createAccount(new CompteBancaire("John Lennon", 150000));
         createAccount(new CompteBancaire("Paul McCartney", 950000));
         createAccount(new CompteBancaire("Ringo Starr", 20000));
