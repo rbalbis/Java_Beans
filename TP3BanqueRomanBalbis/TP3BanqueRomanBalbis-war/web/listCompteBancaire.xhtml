@@ -23,15 +23,15 @@
                     <p:dataTable id="compte" var="compte"  value="#{accountManagedBean.getcompteBancaires()}"                 
                                  paginator="true" rows="10" style="margin-bottom:20px">
 
-                        <p:column headerText="IdCompte">
+                        <p:column headerText="IdCompte" sortBy="#{compte.id}" filterBy="#{compte.id}">
                             <h:outputText value="#{compte.id}" />
                         </p:column>
 
-                        <p:column headerText="Nom du proprietaire">
+                        <p:column headerText="Nom du proprietaire" sortBy="#{compte.listProprietaires[0].nom}" filterBy="#{compte.listProprietaires[0].nom}">
                             <h:outputText value="#{compte.listProprietaires[0].nom}" />
                         </p:column>
 
-                        <p:column headerText="Etat du compte">
+                        <p:column headerText="Etat du compte" sortBy="#{compte.balance}" filterBy="#{compte.balance}">
                             <h:outputText value="#{compte.balance}" />
                         </p:column>
                     </p:dataTable>
