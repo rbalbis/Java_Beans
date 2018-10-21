@@ -10,7 +10,13 @@
     <h:body>
         <ui:composition template="./templates/template_default.xhtml">
             <ui:define name="login">
-
+ <style>
+            #javax_faces_developmentstage_messages{
+                position: fixed;
+                bottom: 10px;
+                left: 240px;
+            }
+        </style>
                 <h:form>
                     <h3>Authentification</h3>
                     <h:outputText value="Username : " />

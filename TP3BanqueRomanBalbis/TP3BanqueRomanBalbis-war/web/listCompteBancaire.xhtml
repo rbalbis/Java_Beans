@@ -23,9 +23,38 @@
                                         <p:dataTable id="compte" var="compte"  value="#{accountManagedBean.getcompteBancaires()}"                 
                                                                                       paginator="true" rows="10" style="margin-bottom:20px">
 
-                                                <p:column headerText="IdCompte" sortBy="#{compte.id}" filterBy="#{compte.id}">
-                                                        <h:outputText value="#{compte.id}" />
-                                                    </p:column>
+
+                        <p:column headerText="IdCompte" sortBy="#{compte.id}" filterBy="#{compte.id}">
+                            <h:outputText value="#{compte.id}" />
+                        </p:column>
+                        
+                        <p:column headerText="M. ou Mme.">
+                           
+                            <h:outputText value="#{compte.listProprietaires[0].nom} #{compte.listProprietaires[0].prenom}" />
+                            
+                        </p:column>
+                        
+           
+                        
+                        <c:if test="#{compte.listProprietaires.size() > 1}">
+                            <p:column headerText="Etat du compte">
+                            <h:outputText value="#{compte.compte.listProprietaires[1].nom} #{compte.listProprietaires[1].prenom}" />
+                        </p:column>
+                        </c:if>
+                        
+                        
+                        
+                    </p:dataTable>
+                    <h3>Exporter les comptes dans un fichier : </h3>
+                    <h:commandLink>
+                        <p:graphicImage value="/images/pdf.png" />
+                        <p:dataExporter type="pdf" target="compte" fileName="listeComptes" />
+                    </h:commandLink>
+                    <h:commandLink>
+                        <p:graphicImage value="/images/excel.png" />
+                        <p:dataExporter type="csv" target="compte" fileName="listeComptes" />
+                    </h:commandLink>
+                </h:form>
 
 
                                                     <p:column headerText="M. ou Mme." sortBy="#{compte.listProprietaires[0].nom}" filterBy="#{compte.listProprietaires[0].nom}">
