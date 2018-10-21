@@ -115,7 +115,7 @@ public class RegisterManagedBean implements Serializable{
         gestionnaireUtilisateur.affecterClientaConseiller(clt, csl);
     }
     
-    public void affecterClientaConseiller(){
+    public void affecterClientEtConseiller(){
         gestionnaireUtilisateur.affecterClientaConseiller(client, conseiller);
     }
     /**
