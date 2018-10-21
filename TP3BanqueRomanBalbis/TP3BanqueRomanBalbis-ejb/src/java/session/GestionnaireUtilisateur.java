@@ -7,6 +7,7 @@ package session;
 
 import entities.Administrateur;
 import entities.Client;
+import entities.CompteBancaire;
 import entities.Conseiller;
 import entities.typeCompteEnum;
 import javax.ejb.Stateless;
@@ -33,6 +34,8 @@ public class GestionnaireUtilisateur {
     private typeCompteEnum typeCompte;
     private String username;
     private String password;
+    
+    GestionnaireDeCompteBancaire gestionnaireDeCompteBancaire;
 
     public Personne createUtilisateur(String nom, String prenom, String username, String password, typeCompteEnum typeCompte) {
 
@@ -100,6 +103,15 @@ public class GestionnaireUtilisateur {
         em.merge(clt);
         em.merge(csl);
     }
+    
+     public void affecterCoProprietaire(Long idCompte, Client coProprietaire){
+        CompteBancaire c = gestionnaireDeCompteBancaire.getComptes(idCompte);
+        Collection<Client> clients = c.getListProprietaires();
+        clients.add(coProprietaire);
+        c.setListProprietaires(clients);
+        em.merge(c);
+    }
+    
     
     public Conseiller getConseillerWithUsername(String username){
         return (Conseiller) getUserWithUsername(username);

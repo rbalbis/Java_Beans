@@ -5,7 +5,9 @@
  */
 package managedbeans;
 
+import entities.Client;
 import entities.CompteBancaire;
+import entities.Personne;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.persistence.PostLoad;
 import session.GestionnaireDeCompteBancaire;
+import session.GestionnaireUtilisateur;
 
 /**
  *
@@ -34,9 +37,13 @@ public class AccountManagedBean implements Serializable {
     @EJB
     private GestionnaireDeCompteBancaire gestionnaireDeCompteBancaire;
     
+    GestionnaireUtilisateur gestionnaireUtilisateur;
+    
     private Long idCompte;
     private double montant;
     private double solde;
+    
+    private Client coProprietaire;
     
  
 
@@ -67,6 +74,10 @@ public class AccountManagedBean implements Serializable {
     public AccountManagedBean() {
     }
     
+    
+    public void affecterCoProprietaire(){
+        gestionnaireUtilisateur.affecterCoProprietaire(idCompte, coProprietaire);
+    }
     
  
     /**

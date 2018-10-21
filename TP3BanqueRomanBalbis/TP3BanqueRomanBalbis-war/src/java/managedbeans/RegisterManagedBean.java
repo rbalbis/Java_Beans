@@ -118,6 +118,7 @@ public class RegisterManagedBean implements Serializable{
     public void affecterClientaConseiller(){
         gestionnaireUtilisateur.affecterClientaConseiller(client, conseiller);
     }
+    
     /**
      * Creates a new instance of RegisterManagedBean
      */
