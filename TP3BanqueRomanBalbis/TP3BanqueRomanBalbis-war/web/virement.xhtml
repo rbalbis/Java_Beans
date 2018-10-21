@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
     <f:metadata>
         <f:viewAction action="#{transactionManagedBean.onload}" />
     </f:metadata>
@@ -33,7 +34,54 @@
                                         <div class="card-body">
                                             <h:outputLabel value="Compte débité : " for="compteDedite"/> 
                                              &nbsp;
-                                            <h:selectOneMenu value="#{transactionManagedBean.idCompteDonneur}">
+                                             
+                                             
+                                             
+                                              <c:if test="#{login.typeCompte == 'CONSEILLER'}">
+                                <c:set var = "conseiller" scope = "session" value = "#{registerManagedBean.getConseillerWithUsername(login.user)}"/>
+                                <h:selectOneMenu value="#{transactionManagedBean.idCompteDonneur}">
+                                    <f:selectItems
+                                        id="compteDedite"
+                                        value="#{conseiller.getCompteClientConseiller()}" 
+                                        var="cd"
+                                        itemLabel="Compte n° #{cd.id} - M. ou Mme. #{cd.listProprietaires[0].nom} #{cd.listProprietaires[0].prenom}"
+                                        itemValue="#{cd.id}"/>
+                                <f:ajax event="change" listener="#{accountManagedBean.getMontantCompteBancaire()}" render="montantCompte" />
+
+                                </h:selectOneMenu>
+
+                            </c:if>
+                            
+                            <c:if test="#{login.typeCompte == 'CLIENT'}">
+                                <h:selectOneMenu value="#{transactionManagedBean.idCompteDonneur}">
+                                    <f:selectItems
+                                        id="compteDedite"
+                                        value="#{registerManagedBean.getClientWithUsername(login.user).listComptes}" 
+                                        var="cd"
+                                        itemLabel="Compte n° #{cd.id} - M. ou Mme. #{cd.listProprietaires[0].nom} #{cd.listProprietaires[0].prenom}"
+                                        itemValue="#{cd.id}"/>
+                                <f:ajax event="change" listener="#{accountManagedBean.getMontantCompteBancaire()}" render="montantCompte" />
+
+                                </h:selectOneMenu>
+                            </c:if>
+                            
+                             <c:if test="${login.typeCompte =='ADMINISTRATEUR'}">
+                                <h:selectOneMenu value="#{transactionManagedBean.idCompteDonneur}">
+                                    <f:selectItems
+                                        id="compteDedite"
+                                        value="#{accountManagedBean.getcompteBancaires()}" 
+                                        var="cd"
+                                        itemLabel="Compte n° #{cd.id} - M. ou Mme. #{cd.listProprietaires[0].nom} #{cd.listProprietaires[0].prenom}" 
+                                        itemValue="#{cd.id}" />
+                                    <f:ajax event="change" listener="#{accountManagedBean.getMontantCompteBancaire()}" render="montantCompte" />
+                                </h:selectOneMenu>
+
+                            </c:if>
+                                             
+                                             
+                                             
+                                             
+                                          <!--  <h:selectOneMenu value="#{transactionManagedBean.idCompteDonneur}">
                                                 <f:selectItems
                                                     id="compteDedite"
                                                     value="#{accountManagedBean.getcompteBancaires()}" 
@@ -42,7 +90,7 @@
                                                     itemValue="#{cd.id}" />
                                                 <f:ajax event="change" listener="#{transactionManagedBean.getMontantCompteBancaire()}" render="soldeId"/>
                                             </h:selectOneMenu>
-
+-->
                                         </div>
                                     </div>
 
