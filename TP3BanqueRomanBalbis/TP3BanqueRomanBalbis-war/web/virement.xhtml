@@ -38,7 +38,7 @@
                                                     id="compteDedite"
                                                     value="#{accountManagedBean.getcompteBancaires()}" 
                                                     var="cd"
-                                                    itemLabel="#{cd.ownerName}" 
+                                                    itemLabel="Compte n° #{cd.id} - M. ou Mme. #{cd.listProprietaires[0].nom} #{cd.listProprietaires[0].prenom}"
                                                     itemValue="#{cd.id}" />
                                                 <f:ajax event="change" listener="#{transactionManagedBean.getMontantCompteBancaire()}" render="soldeId"/>
                                             </h:selectOneMenu>
@@ -55,7 +55,7 @@
                                                     id="compteCredit"
                                                     value="#{accountManagedBean.getcompteBancaires()}" 
                                                     var="cc"
-                                                    itemLabel="#{cc.ownerName}" 
+                                                    itemLabel="Compte n° #{cc.id} - M. ou Mme. #{cc.listProprietaires[0].nom} #{cc.listProprietaires[0].prenom}"
                                                     itemValue="#{cc.id}" />
                                             </h:selectOneMenu>
                                         </div>

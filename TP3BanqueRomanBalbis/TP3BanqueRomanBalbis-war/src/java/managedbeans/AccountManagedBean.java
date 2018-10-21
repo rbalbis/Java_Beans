@@ -76,7 +76,6 @@ public class AccountManagedBean implements Serializable {
      */
     public List<CompteBancaire> getcompteBancaires() {
        this.compteBancaires = gestionnaireDeCompteBancaire.getAllComptes();
-        
         return this.compteBancaires;
     }
 

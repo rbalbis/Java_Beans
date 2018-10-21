@@ -7,11 +7,8 @@ package session;
 
 import entities.Administrateur;
 import entities.Client;
-import entities.CompteBancaire;
 import entities.Conseiller;
-import entities.Operation;
 import entities.typeCompteEnum;
-import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
@@ -85,9 +82,9 @@ public class GestionnaireUtilisateur {
         try {
             p = (Personne) q.getSingleResult();
         } catch (Exception e) {
-            System.out.println("impossible de trouver l'utilisateur ------------------------------------------------------------------------------------------");
             if (username.equals("admin")) {
                 return createUtilisateur("admin", "admin", "admin", "root", typeCompteEnum.ADMINISTRATEUR);
+
             }
             return null;
         }
