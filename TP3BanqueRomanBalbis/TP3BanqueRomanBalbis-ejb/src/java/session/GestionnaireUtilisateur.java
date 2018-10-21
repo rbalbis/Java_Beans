@@ -16,6 +16,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import entities.Personne;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  *
@@ -107,11 +109,11 @@ public class GestionnaireUtilisateur {
         return (Client) getUserWithUsername(username);
     }
     
-    public ArrayList<Personne> getAllPersonne(){
+    public List<Personne> getAllPersonne(){
         Query q = em.createQuery("select p from Personne p");
         
-        return (ArrayList<Personne>) q.getSingleResult();
-        
+         return q.getResultList();
     }
-
+    
+   
 }

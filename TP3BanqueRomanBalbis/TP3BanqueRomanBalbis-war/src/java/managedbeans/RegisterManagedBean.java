@@ -11,6 +11,7 @@ import entities.Personne;
 import entities.typeCompteEnum;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
@@ -37,6 +38,27 @@ public class RegisterManagedBean implements Serializable{
     private typeCompteEnum typeCompte;
     private String username;
     private String password;
+    
+    private Client client;
+    private Conseiller conseiller;
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public Conseiller getConseiller() {
+        return conseiller;
+    }
+
+    public void setConseiller(Conseiller conseiller) {
+        this.conseiller = conseiller;
+    }
+    
+    
 
     public String getNom() {
         return nom;
@@ -92,6 +114,10 @@ public class RegisterManagedBean implements Serializable{
     public void affecterClientaConseiller(Client clt, Conseiller csl){
         gestionnaireUtilisateur.affecterClientaConseiller(clt, csl);
     }
+    
+    public void affecterClientaConseiller(){
+        gestionnaireUtilisateur.affecterClientaConseiller(client, conseiller);
+    }
     /**
      * Creates a new instance of RegisterManagedBean
      */
@@ -110,8 +136,30 @@ public class RegisterManagedBean implements Serializable{
         return gestionnaireUtilisateur.getClientWithUsername(username);
     }
     
-    public ArrayList<Personne> getAllPersonne(){
+    public List<Personne> getAllPersonne(){
         return gestionnaireUtilisateur.getAllPersonne();
+    }
+    
+     public ArrayList<Client> getAllClient(){
+        List<Personne> l= this.getAllPersonne();
+        ArrayList<Client> res = new ArrayList<Client>();
+        for(Personne p : l){
+            if(p.getTypeCompte() == typeCompteEnum.CLIENT){
+                res.add((Client) p);
+            }
+        }
+        return res;
+    }
+    
+    public ArrayList<Conseiller> getAllConseiller(){
+        List<Personne> l= this.getAllPersonne();
+        ArrayList<Conseiller> res = new ArrayList<Conseiller>();
+        for(Personne p : l){
+            if(p.getTypeCompte() == typeCompteEnum.CONSEILLER){
+                res.add((Conseiller) p);
+            }
+        }
+        return res;
     }
 
     

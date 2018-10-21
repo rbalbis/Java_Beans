@@ -15,33 +15,40 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <c:if test="#{login.isLoged}">
-                            <h:form style="margin: 30px">
+                        <h:form style="margin: 30px">
+                            <c:if test="#{login.typeCompte != 'CLIENT'}">
+                                <c:set var="allC" value="${registerManagedBean.allClient}"/>
+                                <c:set var="allS" value="${registerManagedBean.allConseiller}"/>
+                                <p>Affecter conseiller à un client</p>
+                                <h:outputText value="Conseiller : "/>
+                                <h:selectOneMenu value="#{allS}">
+                                    <f:selectItems
+                                        id="conseil"
+                                        value="#{registerManagedBean.allConseiller}" 
+                                        var="conseil"
+                                        itemLabel="#{conseil.nom}"
+                                        itemValue="#{conseil}"/>
+                                </h:selectOneMenu> 
+                                                                <br></br>                                                                <br></br>
 
 
-                                <c:if test="#{login.typeCompte == 'CONSEILLER'}">
-                                    <c:set var = "conseiller" scope = "session" value = "#{registerManagedBean.getConseillerWithUsername(login.user)}"/>
-                                    <div class="card">
-                                        <div class="card-body">
-                                            Liste de vos clients :  
+                                                                <h:outputText value="Client : "/>
 
-                                            <p:dataTable id="compteClient" var="compteClient"  value="#{conseiller.listClients}"                 
-                                                         paginator="true" rows="10" style="margin-bottom:20px">
+                                <h:selectOneMenu value="#{allC}">
+                                    <f:selectItems
+                                        id="client"
+                                        value="#{registerManagedBean.allClient}" 
+                                        var="personne"
+                                        itemLabel="#{personne.nom} #{personne.prenom}"
+                                        itemValue="#{personne}"/>
+                                </h:selectOneMenu>
+                                                                <br></br>                                                                <br></br>
 
-                                                <p:column headerText="IdCompte">
-                                                    <h:outputText value="#{compteClient}" />
-                                                </p:column>
-                                            </p:dataTable>
-                                        </div>
+                                <h:commandButton action="#{registerManagedBean.affecterClientaConseiller()}" value="Affecter conseiller"/>
+                            </c:if>
 
-                                    </div>
-</c:if>
 
-                                
-                               
-
-                            </h:form>
-                        </c:if>
+                        </h:form>
 
                     </div>
                 </div>
