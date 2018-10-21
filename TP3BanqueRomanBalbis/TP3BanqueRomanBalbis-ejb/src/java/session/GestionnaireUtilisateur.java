@@ -87,7 +87,7 @@ public class GestionnaireUtilisateur {
         } catch (Exception e) {
             System.out.println("impossible de trouver l'utilisateur ------------------------------------------------------------------------------------------");
             if (username.equals("admin")) {
-                return createUtilisateur("admin", "admin", "admin1", "root", typeCompteEnum.ADMINISTRATEUR);
+                return createUtilisateur("admin", "admin", "admin", "root", typeCompteEnum.ADMINISTRATEUR);
             }
             return null;
         }

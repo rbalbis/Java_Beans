@@ -23,7 +23,7 @@
                                     id="compteDedite"
                                     value="#{accountManagedBean.getcompteBancaires()}" 
                                     var="cd"
-                                    itemLabel="#{cd.ownerName}" 
+                                    itemLabel="Compte n° #{cd.id} - M. ou Mme. #{cd.listProprietaires[0].nom} #{cd.listProprietaires[0].prenom}" 
                                     itemValue="#{cd.id}" />
                                  <f:ajax event="change" listener="#{accountManagedBean.getMontantCompteBancaire()}" render="montantCompte" />
                            </h:selectOneMenu>
