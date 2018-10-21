@@ -12,6 +12,7 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import session.GestionnaireDeCompteBancaire;
 import session.GestionnaireDeTransaction;
+import session.GestionnaireUtilisateur;
 
 /**
  *
@@ -27,6 +28,7 @@ public class TransactionManagedBean implements Serializable {
     @EJB
     private GestionnaireDeTransaction gestionnaireDeTransaction;
 
+    
     private Long idCompteDonneur;
     private Long idCompteReceveur;
     private int montant;
@@ -44,7 +46,8 @@ public class TransactionManagedBean implements Serializable {
     }
     
     public void send(){
-        gestionnaireDeTransaction.createTransaction(idCompteDonneur, idCompteReceveur, montant);
+        
+        gestionnaireDeTransaction.createTransaction(gestionnaireDeCompteBancaire.getComptes(idCompteDonneur), gestionnaireDeCompteBancaire.getComptes(idCompteReceveur), montant);
         gestionnaireDeCompteBancaire.addSoldeCompteBancaire(idCompteReceveur, montant);
         gestionnaireDeCompteBancaire.removeSoldeCompteBancaire(idCompteDonneur, montant);
     }

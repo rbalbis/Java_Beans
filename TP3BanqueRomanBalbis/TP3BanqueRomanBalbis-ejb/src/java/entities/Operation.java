@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 /**
@@ -27,37 +28,26 @@ public class Operation implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @ManyToOne(fetch=FetchType.LAZY)
-    private CompteBancaire compteBancaire;
-    private Long idEmetteur;
-    private Long idReceveur;
+    @ManyToOne
+    private CompteBancaire CompteEmetteur;
+    
+    @ManyToOne
+    private CompteBancaire CompteReceveur;
+       
     private int montant;
     
 
     Operation(){
     }
-    
-    public Operation(Long emetteur, Long receveur, int montant) {
-            this.idEmetteur = emetteur;
-            idReceveur = receveur;
-            this.montant = montant;
+
+    public Operation(CompteBancaire CompteEmetteur, CompteBancaire CompteReceveur, int montant) {
+        this.CompteEmetteur = CompteEmetteur;
+        this.CompteReceveur = CompteReceveur;
+        this.montant = montant;
     }
 
-    public Long getIdEmetteur() {
-        return idEmetteur;
-    }
 
-    public void setIdEmetteur(Long idEmetteur) {
-        this.idEmetteur = idEmetteur;
-    }
-
-    public Long getIdReceveur() {
-        return idReceveur;
-    }
-
-    public void setIdReceveur(Long idReceveur) {
-        this.idReceveur = idReceveur;
-    }
+   
 
     public int getMontant() {
         return montant;

@@ -33,6 +33,7 @@ public class AccountManagedBean implements Serializable {
 
     @EJB
     private GestionnaireDeCompteBancaire gestionnaireDeCompteBancaire;
+    
     private Long idCompte;
     private double montant;
     private double solde;
@@ -65,11 +66,7 @@ public class AccountManagedBean implements Serializable {
      */
     public AccountManagedBean() {
     }
-
-    @PostConstruct
-    public void testUsers() {
-        gestionnaireDeCompteBancaire.creerComptesTest();
-    }
+    
     
  
     /**
@@ -78,9 +75,8 @@ public class AccountManagedBean implements Serializable {
      * @return
      */
     public List<CompteBancaire> getcompteBancaires() {
-        if (compteBancaires == null) {
-            compteBancaires = gestionnaireDeCompteBancaire.getAllComptes();
-        }
+       this.compteBancaires = gestionnaireDeCompteBancaire.getAllComptes();
+        
         return this.compteBancaires;
     }
 

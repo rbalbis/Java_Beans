@@ -49,7 +49,6 @@ public class CompteBancaire implements Serializable {
     
     private double balance;
     
-    @OneToMany(mappedBy = "compteBancaire")
     private List<Operation> transaction;
 
     

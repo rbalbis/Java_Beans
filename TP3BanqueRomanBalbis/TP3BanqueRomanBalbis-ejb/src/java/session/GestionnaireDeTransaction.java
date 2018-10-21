@@ -5,6 +5,7 @@
  */
 package session;
 
+import entities.Client;
 import entities.CompteBancaire;
 import entities.Operation;
 import java.io.Serializable;
@@ -26,9 +27,9 @@ public class GestionnaireDeTransaction implements Serializable{
     @PersistenceContext(unitName = "TP3BanqueRomanBalbis-ejbPU")
     private EntityManager em;
 
-    public void createTransaction(Long emetteur, Long receveur, int montant) {
+    public void createTransaction(CompteBancaire compteEmetteur,CompteBancaire compteReceveur, int montant) {
         
-        Operation t = new Operation(emetteur, receveur, montant);
+        Operation t = new Operation(compteEmetteur,compteReceveur, montant);
         em.persist(t);
     }
 
@@ -38,24 +39,21 @@ public class GestionnaireDeTransaction implements Serializable{
         return (Operation) query.getSingleResult();
     }
 
-    List<Operation> getAllTransactionFromAccount(Long id) {
-        Query query = em.createQuery("select t from Transaction t where t.idEmetteur = :id or t.idReceveur = :id");
-        query.setParameter("id", id);
+    List<Operation> getAllTransactionFromAccount(CompteBancaire c) {
+        Query query = em.createQuery("select t from Transaction t where t.emetteur = :compte or t.receveur = :compte");
+        query.setParameter("compte", c);
         return (List<Operation>) query.getSingleResult();
     }
     
-    List<Operation> getReceivedTransactionFromAccount(Long id) {
-        Query query = em.createQuery("select t from Transaction t where t.idReceveur = :id");
-        query.setParameter("id", id);
+    List<Operation> getReceivedTransactionFromAccount(CompteBancaire c) {
+        Query query = em.createQuery("select t from Transaction t where t.receveur = :c");        
+        query.setParameter("compte", c);
         return (List<Operation>) query.getSingleResult();
     }
     
-    List<Operation> getSentTransactionFromAccount(Long id) {
-        Query query = em.createQuery("select t from Transaction t where t.idEmetteur = :id");
-        query.setParameter("id", id);
+    List<Operation> getSentTransactionFromAccount(CompteBancaire c) {
+        Query query = em.createQuery("select t from Transaction t where t.emetteur = :compte");
+        query.setParameter("compte", c);
         return (List<Operation>) query.getSingleResult();
     }
-
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
 }
